@@ -1,4 +1,4 @@
-// ----- cultoOS -----
+// ----- CultoOS -----
 // Normalizes scripture references typed the Brazilian way before they reach the json-bible search:
 // - accent-sensitive abbreviations: "jo" = João, "jó" = Jó (json-bible ignores accents and would pick Jó for both)
 // - chapter and verse separated by a space or a dot: "jo 3 16" / "jo 3.16" -> "João 3:16"

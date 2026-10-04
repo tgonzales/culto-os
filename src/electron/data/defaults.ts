@@ -2,7 +2,7 @@ import type { SaveListSettings, SaveListSyncedSettings } from "../../types/Save"
 
 export const defaultConfig = { loaded: false, maximized: true, bounds: { width: 800, height: 600, x: 0, y: 0 }, dataPath: null, disableHardwareAcceleration: null, graphicsDevice: null }
 
-// cultoOS: pastel group colors
+// CultoOS: pastel group colors
 export const defaultGroups = {
     break: { name: "break", default: true, color: "#e6a1a1" },
     bridge: { name: "bridge", default: true, color: "#e8b796", shortcut: "B" },
@@ -95,7 +95,7 @@ export const defaultSyncedSettings: { [key in SaveListSyncedSettings]: any } = {
     categories: {
         song: { name: "category.song", icon: "song", default: true },
         presentation: { name: "category.presentation", icon: "presentation", default: true },
-        // cultoOS: dedicated category for church announcements
+        // CultoOS: dedicated category for church announcements
         notice: { name: "category.notice", icon: "info", default: true }
     },
     drawSettings: {},
@@ -121,7 +121,7 @@ export const defaultSyncedSettings: { [key in SaveListSyncedSettings]: any } = {
     interactions: {},
     audioStreams: {},
     audioPlaylists: {},
-    // cultoOS: the free Portuguese Bibles in public/bibles are installed on first run (frontend/utils/bundledBibles.ts)
+    // CultoOS: the free Portuguese Bibles in public/bibles are installed on first run (frontend/utils/bundledBibles.ts)
     scriptures: {},
     scriptureSettings: {
         template: "scripture",
@@ -130,7 +130,7 @@ export const defaultSyncedSettings: { [key in SaveListSyncedSettings]: any } = {
         showVersion: false,
         showVerse: true,
         referenceDivider: ":",
-        // cultoOS: split long verses into several slides by default
+        // CultoOS: split long verses into several slides by default
         splitLongVerses: true
     },
     groups: defaultGroups,

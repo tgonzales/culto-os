@@ -34,7 +34,7 @@ export function clearAll(button = false) {
     clearTimers()
 }
 
-// cultoOS: "panic button" - clear everything (including the last slide) and show the church logo
+// CultoOS: "panic button" - clear everything (including the last slide) and show the church logo
 export function showChurchLogo() {
     if (get(outLocked)) return
 

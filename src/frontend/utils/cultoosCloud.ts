@@ -1,5 +1,5 @@
-// ----- cultoOS -----
-// Renderer side of the cultoOS cloud sync (see src/electron/cloud/cultoos.ts)
+// ----- CultoOS -----
+// Renderer side of the CultoOS cloud sync (see src/electron/cloud/cultoos.ts)
 
 import { get, writable } from "svelte/store"
 import { uid } from "uid"

@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>cultoOS - Carregando</title>
+        <title>CultoOS - Carregando</title>
 
         <link rel="stylesheet" href="global.css" />
 
@@ -34,8 +34,7 @@
             img {
                 width: 96px;
                 height: 96px;
-                border-radius: 22px;
-                box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+                filter: drop-shadow(0 10px 24px rgb(0 0 0 / 0.3));
             }
 
             .text {
@@ -50,10 +49,12 @@
 
             h1 {
                 font-size: 2.6em;
-                background: -webkit-linear-gradient(340deg, #d6bc9c, #b08968);
-                background-clip: text;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+                color: #f4eee9;
+                letter-spacing: -0.03em;
+            }
+
+            h1 span {
+                color: #d9925e;
             }
 
             .loader {
@@ -116,10 +117,10 @@
         </div>
 
         <main>
-            <img src="./brand-logo.png" alt="cultoOS" draggable="false" />
+            <img src="./brand-logo.png" alt="CultoOS" draggable="false" />
 
             <div class="text">
-                <h1>cultoOS</h1>
+                <h1>Culto<span>OS</span></h1>
                 <p class="v">v<span class="version">0.0.0</span></p>
             </div>
         </main>

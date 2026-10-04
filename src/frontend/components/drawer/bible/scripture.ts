@@ -1107,7 +1107,7 @@ export async function getScriptureSlidesNew(data: any, onlyOne = false, disableR
                                 })
                             }
 
-                            // cultoOS: words picked in the highlight panel are emphasized
+                            // CultoOS: words picked in the highlight panel are emphasized
                             const highlight = get(scriptureHighlights)[verse.highlightKey || ""]
                             const highlightedStyle = highlightStyle(get(scriptureSettings).highlightColor)
                             const pushVerseText = (value: string, extra: { style?: string; customType?: string } = {}) => {

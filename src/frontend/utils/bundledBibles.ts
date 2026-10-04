@@ -1,4 +1,4 @@
-// ----- cultoOS -----
+// ----- CultoOS -----
 // Installs the free Portuguese Bibles shipped with the app (public/bibles) on first run, so scripture works offline out of the box
 
 import { get } from "svelte/store"

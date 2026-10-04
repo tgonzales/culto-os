@@ -1,6 +1,6 @@
 appId: app.cultoos
-productName: cultoOS
-artifactName: cultoOS-${version}-${arch}.${ext}
+productName: CultoOS
+artifactName: CultoOS-${version}-${arch}.${ext}
 
 # GitHub Releases of tgonzales/culto-os (used by .github/workflows/release.yml and by the in-app update check)
 publish:
@@ -45,7 +45,7 @@ win:
         - "**/node_modules/libspotifyctl/**/*"
         - "**/node_modules/openmediatransport/**"
         - "**/node_modules/sherpa-onnx-*/**"
-    # TODO(cultoOS): add our own code signing certificate (unsigned builds trigger Windows SmartScreen)
+    # TODO(CultoOS): add our own code signing certificate (unsigned builds trigger Windows SmartScreen)
 
 # linux
 

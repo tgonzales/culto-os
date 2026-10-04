@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="CultoOS">
+  <defs>
+    <mask id="play">
+      <polygon points="22,18 82,50 22,82" fill="#fff" stroke="#fff" stroke-width="20" stroke-linejoin="round"/>
+      <rect x="37" y="0" width="6" height="100" fill="#000"/>
+      <rect x="0" y="45" width="100" height="6" fill="#000"/>
+    </mask>
+  </defs>
+  <g mask="url(#play)">
+    <rect width="37" height="45" fill="#EAD5C2"/>
+    <rect x="43" width="57" height="45" fill="#C98654"/>
+    <rect y="51" width="37" height="49" fill="#7A5A48"/>
+    <path d="M0 80 C13 70 25 68 37 61 V100 H0 Z" fill="#583A2A"/>
+    <rect x="43" y="51" width="57" height="49" fill="#A9583C"/>
+  </g>
+</svg>

@@ -1,5 +1,5 @@
-// ----- cultoOS -----
-// Pure helpers for the cultoOS cloud sync: record keys, hashing and local change detection.
+// ----- CultoOS -----
+// Pure helpers for the CultoOS cloud sync: record keys, hashing and local change detection.
 
 import crypto from "crypto"
 

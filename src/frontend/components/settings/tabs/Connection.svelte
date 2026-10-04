@@ -211,7 +211,7 @@
 
     // OBS Controller
 
-    // cultoOS: simple mode hides advanced servers & integrations unless they are already in use
+    // CultoOS: simple mode hides advanced servers & integrations unless they are already in use
     $: advanced = !!$special.advancedMode
     $: integrationsInUse = $obsData.enabled || $providerConnections.planningcenter || ($providerConnections.churchApps && !cloudOnly.churchApps) || $providerConnections.amazinglife || $providerConnections.onstage
 

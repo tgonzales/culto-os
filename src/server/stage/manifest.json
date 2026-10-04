@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "cultoOS Stage",
-    "short_name": "cultoOS Stage",
+    "name": "CultoOS Stage",
+    "short_name": "CultoOS Stage",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#242832",
     "theme_color": "#242832",
-    "description": "A stage display for cultoOS.",
+    "description": "A stage display for CultoOS.",
     "icons": [
         {
             "src": "icon.png",

@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "cultoOS Camera",
-    "short_name": "cultoOS Camera",
+    "name": "CultoOS Camera",
+    "short_name": "CultoOS Camera",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#242832",
     "theme_color": "#242832",
-    "description": "A camera app for cultoOS.",
+    "description": "A camera app for CultoOS.",
     "icons": [
         {
             "src": "icon.png",

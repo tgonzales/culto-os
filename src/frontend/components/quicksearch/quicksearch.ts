@@ -693,7 +693,7 @@ function getSettings() {
     return translateNames(settings)
 }
 
-// cultoOS: upstream FreeShow docs/video links removed; add our own help articles here
+// CultoOS: upstream FreeShow docs/video links removed; add our own help articles here
 const faq: { id: string; name: string; icon: string; aliases?: string[] }[] = []
 
 function getFaq() {

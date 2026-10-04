@@ -1,4 +1,4 @@
-// ----- cultoOS -----
+// ----- CultoOS -----
 // Quick scripture highlights: the operator picks words of the selected verse and they are emphasized on the output.
 // Highlights live for the session (they are not saved).
 

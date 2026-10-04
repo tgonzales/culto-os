@@ -1,4 +1,4 @@
-// cultoOS: usage analytics removed (upstream sent events to Google Analytics).
+// CultoOS: usage analytics removed (upstream sent events to Google Analytics).
 // Exports are kept as no-ops so upstream call sites keep compiling.
 
 export function startTracking() {}

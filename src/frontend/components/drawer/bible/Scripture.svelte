@@ -168,7 +168,7 @@
 
     $: isActiveInOutput = outputIsScripture($outputs)
 
-    // ----- cultoOS: quick highlights -----
+    // ----- CultoOS: quick highlights -----
     let highlightOpen = false
     $: currentBookName = books?.find((b: any) => b.number?.toString() === activeReference.book?.toString())?.name || ""
     $: currentChapter = activeReference.chapters[activeReference.chapters.length - 1]
@@ -629,7 +629,7 @@
             return
         }
 
-        // cultoOS: Brazilian reference formats ("jo 3 16" -> "João 3:16"); the reassignment triggers a new search
+        // CultoOS: Brazilian reference formats ("jo 3 16" -> "João 3:16"); the reassignment triggers a new search
         const normalizedValue = normalizeReference(searchValue, books || [])
         if (normalizedValue !== searchValue) {
             searchValue = normalizedValue

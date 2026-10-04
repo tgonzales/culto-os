@@ -1,12 +1,12 @@
 {
     "name": "cultoos",
-    "productName": "cultoOS",
+    "productName": "CultoOS",
     "version": "0.1.0",
     "private": true,
     "main": "build/electron/index.js",
     "description": "Church worship presentation software (based on FreeShow)",
     "repository": "https://github.com/tgonzales/culto-os",
-    "author": "cultoOS",
+    "author": "CultoOS",
     "license": "GPL-3.0",
     "engines": {
         "node": ">=22.12.0"

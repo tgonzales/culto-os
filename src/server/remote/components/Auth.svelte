@@ -17,8 +17,8 @@
 <div class="auth-page">
     <div class="panel">
         <div class="brand">
-            <img class="logo" src={brandLogo} alt="cultoOS logo" draggable="false" />
-            <h1>cultoOS Remote</h1>
+            <img class="logo" src={brandLogo} alt="CultoOS logo" draggable="false" />
+            <h1>CultoOS Remote</h1>
         </div>
 
         <form on:submit|preventDefault={submit} class="auth-form">

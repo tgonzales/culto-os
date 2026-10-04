@@ -1,6 +1,6 @@
 appId: app.cultoos
-productName: cultoOS
-artifactName: cultoOS-${version}-${arch}.${ext}
+productName: CultoOS
+artifactName: CultoOS-${version}-${arch}.${ext}
 
 files:
     - build/electron/**

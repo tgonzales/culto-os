@@ -1,5 +1,5 @@
-// ----- cultoOS -----
-// Sync with the cultoOS cloud: pair this computer with a code from the web panel, then pull/push records.
+// ----- CultoOS -----
+// Sync with the CultoOS cloud: pair this computer with a code from the web panel, then pull/push records.
 
 import crypto from "crypto"
 import { safeStorage } from "electron"
@@ -36,7 +36,7 @@ function getConnection(): Connection | null {
         const token = stored.encrypted ? safeStorage.decryptString(Buffer.from(stored.token, "base64")) : stored.token
         return { token, churchName: stored.churchName || "", deviceName: stored.deviceName || "" }
     } catch (err) {
-        console.error("cultoOS: could not read the cloud token", err)
+        console.error("CultoOS: could not read the cloud token", err)
         return null
     }
 }
@@ -349,7 +349,7 @@ export async function cultoosSync() {
         if (err?.status === 401) return { success: false, error: "unauthorized" }
         // no active plan or trial: the app keeps working offline
         if (err?.status === 402) return { success: false, error: "plan_required" }
-        console.error("cultoOS sync failed:", err)
+        console.error("CultoOS sync failed:", err)
         return { success: false, error: "sync_failed" }
     } finally {
         syncing = false

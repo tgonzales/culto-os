@@ -9,7 +9,7 @@
 
     let activeTabs: SettingsTabs[] = []
     $: profile = $profiles[$activeProfile || ""]
-    // cultoOS: simple mode hides the AI ("Smart") tab unless AI is already enabled
+    // CultoOS: simple mode hides the AI ("Smart") tab unless AI is already enabled
     $: hideAi = !$special.advancedMode && !$ai.enabled
     $: activeTabs = clone(settingsTabs).filter((tabId) => (!profile || profile.access.settings?.[tabId] !== "none") && !(hideAi && tabId === "ai"))
 

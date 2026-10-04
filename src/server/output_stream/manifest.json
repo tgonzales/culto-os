@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "cultoOS Output",
-    "short_name": "cultoOS Output",
+    "name": "CultoOS Output",
+    "short_name": "CultoOS Output",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#242832",
     "theme_color": "#242832",
-    "description": "View the output from cultoOS.",
+    "description": "View the output from CultoOS.",
     "icons": [
         {
             "src": "icon.png",

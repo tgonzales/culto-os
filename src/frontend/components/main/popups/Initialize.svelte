@@ -18,7 +18,7 @@
     import MaterialTextInput from "../../inputs/MaterialTextInput.svelte"
     import MaterialToggleSwitch from "../../inputs/MaterialToggleSwitch.svelte"
 
-    // cultoOS: optional church connection on the first run
+    // CultoOS: optional church connection on the first run
     let churchCode = ""
     let deviceName = ""
 
@@ -86,7 +86,7 @@
 
     <MaterialFolderPicker PICK_ID="DATA_SHOWS" label={translateText("settings.data_location", $dictionary)} value={$dataPath} on:change={updateDataPath} openButton={false} />
 
-    <!-- cultoOS: connect to the church on the first run (optional) -->
+    <!-- CultoOS: connect to the church on the first run (optional) -->
     <p style="margin: 18px 0 6px;font-size: 0.9em;opacity: 0.85;"><T id="setup.cultoos_connect" /></p>
     <InputRow>
         <MaterialTextInput style="width: 50%;" label="cloud.cultoos_code" value={churchCode} placeholder="ABCD-EFGH" on:change={(e) => (churchCode = e.detail)} />

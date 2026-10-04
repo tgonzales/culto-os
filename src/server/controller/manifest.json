@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "cultoOS Controller",
-    "short_name": "cultoOS Controller",
+    "name": "CultoOS Controller",
+    "short_name": "CultoOS Controller",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#242832",
     "theme_color": "#242832",
-    "description": "A remote controller app for cultoOS.",
+    "description": "A remote controller app for CultoOS.",
     "icons": [
         {
             "src": "icon.png",

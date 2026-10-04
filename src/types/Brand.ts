@@ -1,8 +1,8 @@
-// ----- cultoOS -----
+// ----- CultoOS -----
 // Single source of truth for product branding (fork of FreeShow, GPL-3.0)
 
 export const BRAND = {
-    name: "cultoOS",
+    name: "CultoOS",
     // used when the system language is English or not supported
     defaultLanguage: "pt_BR",
     // used for folders on disk (Documents/<folderName>)
@@ -10,7 +10,7 @@ export const BRAND = {
     // file name prefixes (recordings, exports)
     filePrefix: "cultoOS",
     website: "",
-    // cultoOS cloud (web panel + sync API); override with the CULTOOS_CLOUD_URL env var in development
+    // CultoOS cloud (web panel + sync API); override with the CULTOOS_CLOUD_URL env var in development
     cloudUrl: "https://culto-os-cloud.vercel.app",
     docsUrl: "",
     supportEmail: "",

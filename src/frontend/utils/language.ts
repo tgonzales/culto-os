@@ -31,7 +31,7 @@ function setLanguage(locale = "", init = false) {
             if (replace[key].includes(locale)) locale = key
         })
 
-        // cultoOS: default to the brand language unless the system uses another supported (non-English) language
+        // CultoOS: default to the brand language unless the system uses another supported (non-English) language
         if (!replace[locale] || locale.startsWith("en")) locale = BRAND.defaultLanguage
     }
 

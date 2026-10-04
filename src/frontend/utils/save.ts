@@ -300,7 +300,7 @@ export async function saveComplete({ closeWhenFinished, customTriggers }: { clos
         saved.set(true)
         console.info("SAVED!")
 
-        // cultoOS cloud: send the saved changes right away
+        // CultoOS cloud: send the saved changes right away
         if (!customTriggers?.backup && !customTriggers?.reset) cultoosSyncNow()
     }
 

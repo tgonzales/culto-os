@@ -67,7 +67,7 @@ config.set("loaded", true)
 if (!config.get("loaded")) console.error("Could not get stored data!")
 
 // info
-console.info("Starting cultoOS...")
+console.info("Starting CultoOS...")
 if (!isProd) console.info("Building app! (This may take 5-40 seconds)")
 
 // set application menu

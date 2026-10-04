@@ -1721,7 +1721,7 @@ const clickActions = {
     favourite: (obj: ObjData) => {
         if (!obj.sel) return
 
-        // cultoOS: favourite shows (songs) are stored as a list of show ids
+        // CultoOS: favourite shows (songs) are stored as a list of show ids
         if (obj.sel.id === "show_drawer") {
             const ids: string[] = obj.sel.data.map((a) => a.id)
             const current: string[] = get(special).favouriteShows || []

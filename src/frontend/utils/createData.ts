@@ -45,7 +45,7 @@ export function createData(paths: MainFilePaths) {
         a.default = { name: translateText("example.meetings"), parent: "/" }
         return a
     })
-    // cultoOS: a ready sample service so the operator sees how a culto is organized
+    // CultoOS: a ready sample service so the operator sees how a culto is organized
     projects.update((a) => {
         a.default = {
             name: translateText("example.sample_service"),
@@ -424,7 +424,7 @@ function getDefaultOverlays() {
             {
                 style: "top:870px;left:1248px;height:170px;width:630px;",
                 align: "align-items:flex-end;",
-                lines: [{ align: "text-align: right;", text: [{ value: "cultoOS", style: "font-size:50px;font-weight:bold;color:#F0008C;" }] }]
+                lines: [{ align: "text-align: right;", text: [{ value: "CultoOS", style: "font-size:50px;font-weight:bold;color:#F0008C;" }] }]
             }
         ]
     }

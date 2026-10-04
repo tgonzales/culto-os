@@ -282,7 +282,7 @@
 <!-- cloud -->
 <Title label="settings.cloud" icon="cloud" title="cloud.info" />
 
-<!-- cultoOS cloud (the ChurchApps sync is only shown in advanced mode) -->
+<!-- CultoOS cloud (the ChurchApps sync is only shown in advanced mode) -->
 <CultoosCloud />
 
 {#if !$special.advancedMode && !$providerConnections.churchApps}

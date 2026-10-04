@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "cultoOS Remote",
-    "short_name": "cultoOS Remote",
+    "name": "CultoOS Remote",
+    "short_name": "CultoOS Remote",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#242832",
     "theme_color": "#242832",
-    "description": "A remote for cultoOS.",
+    "description": "A remote for CultoOS.",
     "icons": [
         {
             "src": "icon.png",

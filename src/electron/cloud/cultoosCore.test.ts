@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { chunk, diffLocal, emptyLedger, hashData, mediaContentType, mediaRecordId, needsApply, referencedMediaPaths, rememberApplied, showFileName } from "./cultoosCore"
 
-describe("cultoOS sync core", () => {
+describe("CultoOS sync core", () => {
     it("pushes new and edited records, skipping unchanged ones", () => {
         const ledger = emptyLedger()
         const local = [

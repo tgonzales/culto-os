@@ -379,7 +379,7 @@ export const previewShortcuts = {
         clearAudio("", { clearPlaylist: true, clearMicrophones: true, commonClear: true })
         timelineRecordingAction.set({ id: "clear_audio" })
     },
-    // cultoOS: panic button (clear everything and show the church logo)
+    // CultoOS: panic button (clear everything and show the church logo)
     F6: () => showChurchLogo(),
     F5: () => {
         if (!presentationControllersKeysDisabled()) OutputHelper.advanceOutputs()
