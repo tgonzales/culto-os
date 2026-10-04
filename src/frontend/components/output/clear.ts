@@ -2,7 +2,8 @@ import { get } from "svelte/store"
 import type { OutSlide } from "../../../types/Show"
 import { clearAudio } from "../../audio/audioFading"
 import { AudioPlayer } from "../../audio/audioPlayer"
-import { activeEdit, activePage, activePopup, activeStage, contextActive, customMessageCredits, drawSettings, focusMode, outLocked, outputCache, outputs, outputSlideCache, overlays, overlayTimers, playingAudio, playingMetronome, selected, slideTimers, topContextActive } from "../../stores"
+import { activeEdit, activePage, activePopup, activeStage, contextActive, customMessageCredits, drawSettings, focusMode, outLocked, outputCache, outputs, outputSlideCache, overlays, overlayTimers, playingAudio, playingMetronome, selected, slideTimers, special, topContextActive } from "../../stores"
+import { newToast } from "../../utils/common"
 import { customActionActivation } from "../actions/actions"
 import { startMetronome } from "../drawer/audio/metronome"
 import { clone } from "../helpers/array"
@@ -31,6 +32,22 @@ export function clearAll(button = false) {
     clearOverlays()
     clearAudio("", { clearPlaylist: true, commonClear: true })
     clearTimers()
+}
+
+// cultoOS: "panic button" - clear everything (including the last slide) and show the church logo
+export function showChurchLogo() {
+    if (get(outLocked)) return
+
+    clearAll(true)
+    clearSlide(true)
+
+    const logo: string = get(special).churchLogo || ""
+    if (!logo) {
+        newToast("clear.logo_missing")
+        return
+    }
+
+    setOutput("background", { path: logo, type: "image", loop: false, muted: true })
 }
 
 function storeCache() {

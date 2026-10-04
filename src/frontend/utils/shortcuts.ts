@@ -15,7 +15,7 @@ import { getExtension, getMedia, getMediaLayerType, getMediaStyle, getMediaType 
 import { getFirstActiveOutput, refreshOut, setOutput, startFolderTimer, toggleOutputs } from "../components/helpers/output"
 import { OutputHelper } from "../components/helpers/OutputHelper"
 import { VideoPlayer } from "../components/media/video/videoPlayer"
-import { clearAll, clearBackground, clearSlide } from "../components/output/clear"
+import { clearAll, clearBackground, clearSlide, showChurchLogo } from "../components/output/clear"
 import { getRecentlyUsedProjects, openProject } from "../components/show/project"
 import { importFromClipboard } from "../converters/importHelpers"
 import { addSection } from "../converters/project"
@@ -155,7 +155,7 @@ export function keydown(e: KeyboardEvent) {
         if (e.key === "Escape" && !contentDisplayed) return hideDisplay()
 
         // allow custom shortcuts through main display (could be useful in some cases when you need output over the main app)
-        const allowThroughWindow = ["Escape", "ArrowRight", "ArrowLeft", " ", "PageDown", "PageUp", "Home", "End", ".", "F1", "F2", "F3", "F4", "F5"]
+        const allowThroughWindow = ["Escape", "ArrowRight", "ArrowLeft", " ", "PageDown", "PageUp", "Home", "End", ".", "F1", "F2", "F3", "F4", "F5", "F6"]
         if (allowThroughWindow.includes(e.key)) send(OUTPUT, ["MAIN_SHORTCUT"], { key: e.key, ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey })
 
         return
@@ -379,6 +379,8 @@ export const previewShortcuts = {
         clearAudio("", { clearPlaylist: true, clearMicrophones: true, commonClear: true })
         timelineRecordingAction.set({ id: "clear_audio" })
     },
+    // cultoOS: panic button (clear everything and show the church logo)
+    F6: () => showChurchLogo(),
     F5: () => {
         if (!presentationControllersKeysDisabled()) OutputHelper.advanceOutputs()
         else setOutput("transition", null)

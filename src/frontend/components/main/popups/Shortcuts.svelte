@@ -63,6 +63,7 @@
         "clear.slide": "f2",
         "clear.overlays": "f3",
         "clear.audio": "f4",
+        "clear.logo": "f6",
         // "preview._next_slide": "f5",
         // "preview._next_slide": "Arrow Right",
 

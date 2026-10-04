@@ -5,6 +5,8 @@
     import { sortByName } from "../../helpers/array"
     import Title from "../../input/Title.svelte"
     import MaterialDropdown from "../../inputs/MaterialDropdown.svelte"
+    import MaterialFilePicker from "../../inputs/MaterialFilePicker.svelte"
+    import { imageExtensions } from "../../../values/extensions"
     import MaterialPopupButton from "../../inputs/MaterialPopupButton.svelte"
     import MaterialToggleSwitch from "../../inputs/MaterialToggleSwitch.svelte"
 
@@ -40,8 +42,10 @@
 </script>
 
 <MaterialDropdown label="settings.language" value={$language} options={getLanguageList()} on:change={(e) => setLanguage(e.detail)} flags />
+<MaterialToggleSwitch label="settings.advanced_mode" title="settings.advanced_mode_tip" checked={!!$special.advancedMode} defaultValue={false} on:change={(e) => updateSpecial(e.detail, "advancedMode")} />
 <MaterialToggleSwitch label="settings.use24hClock" checked={$timeFormat === "24"} on:change={(e) => timeFormat.set(e.detail ? "24" : "12")} />
 <MaterialToggleSwitch label="settings.disable_labels" checked={$labelsDisabled} defaultValue={false} on:change={(e) => labelsDisabled.set(e.detail)} />
+<MaterialFilePicker label="settings.church_logo" value={$special.churchLogo || ""} filter={{ name: "Images", extensions: imageExtensions }} on:change={(e) => updateSpecial(e.detail, "churchLogo")} allowEmpty />
 <MaterialToggleSwitch label="settings.full_colors" checked={$fullColors} defaultValue={false} on:change={(e) => fullColors.set(e.detail)} />
 
 <!-- SLIDES -->

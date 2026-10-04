@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { SettingsTabs } from "../../../types/Tabs"
-    import { activePage, activeProfile, focusMode, profiles, settingsTab } from "../../stores"
+    import { activePage, activeProfile, ai, focusMode, profiles, settingsTab, special } from "../../stores"
     import { settingsTabs } from "../../values/tabs"
     import { clone } from "../helpers/array"
     import Icon from "../helpers/Icon.svelte"
@@ -9,8 +9,9 @@
 
     let activeTabs: SettingsTabs[] = []
     $: profile = $profiles[$activeProfile || ""]
-    $: if (profile) activeTabs = clone(settingsTabs).filter((tabId) => profile.access.settings?.[tabId] !== "none")
-    else activeTabs = clone(settingsTabs)
+    // cultoOS: simple mode hides the AI ("Smart") tab unless AI is already enabled
+    $: hideAi = !$special.advancedMode && !$ai.enabled
+    $: activeTabs = clone(settingsTabs).filter((tabId) => (!profile || profile.access.settings?.[tabId] !== "none") && !(hideAi && tabId === "ai"))
 
     function keydown(e: KeyboardEvent) {
         if (e.target?.closest?.(".edit") || e.ctrlKey || e.metaKey) return

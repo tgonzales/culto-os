@@ -171,7 +171,10 @@
         "nextTimer": "Limpar temporizador do próximo slide",
         "timer": "Limpar temporizador",
         "drawing": "Limpar anotações",
-        "search": "Limpar pesquisa"
+        "search": "Limpar pesquisa",
+        "logo": "Logo",
+        "logo_tip": "Botão de pânico: limpa tudo e mostra a logo da igreja",
+        "logo_missing": "Defina a logo da igreja em Configurações > Geral para exibi-la aqui."
     },
     "remove": {
         "background": "Remover plano de fundo",
@@ -1461,7 +1464,10 @@
         "preview_frame_rate": "Taxa de frames do preview",
         "auto": "Automático",
         "section_trigger_action": "Ativar ação quando navegar de uma apresentação para uma seção",
-        "rss": "RSS"
+        "rss": "RSS",
+        "church_logo": "Logo da igreja",
+        "advanced_mode": "Modo avançado",
+        "advanced_mode_tip": "Mostrar integrações avançadas (API, OBS, provedores de conteúdo, IA)"
     },
     "output": {
         "state_inactive": "Inativo",

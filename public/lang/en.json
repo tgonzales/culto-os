@@ -174,7 +174,10 @@
         "timer": "Clear timer",
         "scene": "Clear scene",
         "drawing": "Clear drawing",
-        "search": "Clear search"
+        "search": "Clear search",
+        "logo": "Logo",
+        "logo_tip": "Panic button: clear everything and show the church logo",
+        "logo_missing": "Set the church logo in Settings > General to show it here."
     },
     "remove": {
         "background": "Remove background",
@@ -1491,7 +1494,10 @@
         "preview_frame_rate": "Preview frame rate",
         "auto": "Auto",
         "section_trigger_action": "Trigger action when navigating presentation to a section",
-        "rss": "RSS"
+        "rss": "RSS",
+        "church_logo": "Church logo",
+        "advanced_mode": "Advanced mode",
+        "advanced_mode_tip": "Show advanced integrations (API, OBS, content providers, AI)"
     },
     "gpu": {
         "no_acceleration": "Graphics acceleration is unavailable",

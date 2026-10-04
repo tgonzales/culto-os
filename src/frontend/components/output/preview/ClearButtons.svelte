@@ -9,7 +9,7 @@
     import { getActiveOutputs, getOutputContent, isOutCleared } from "../../helpers/output"
     import T from "../../helpers/T.svelte"
     import MaterialButton from "../../inputs/MaterialButton.svelte"
-    import { clearAll, clearBackground, clearOverlays, clearScene, clearSlide, clearTimers, restoreOutput } from "../clear"
+    import { clearAll, clearBackground, clearOverlays, clearScene, clearSlide, clearTimers, restoreOutput, showChurchLogo } from "../clear"
 
     export let autoChange: any
     export let activeClear: any
@@ -136,6 +136,11 @@
                 {#if !$labelsDisabled}<T id="clear.all" />{/if}
             </MaterialButton>
         {/if}
+
+        <MaterialButton style="padding: 0.42em 0.8em;" disabled={$outLocked} title="clear.logo_tip [F6]" on:click={showChurchLogo}>
+            <Icon id="church" size={1.2} white />
+            {#if !$labelsDisabled}<T id="clear.logo" />{/if}
+        </MaterialButton>
     </span>
 
     <span class="group">
