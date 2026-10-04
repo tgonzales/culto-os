@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { normalizeReference } from "./referenceNormalize"
     import JSONBible from "json-bible"
     import { ApiBible } from "json-bible/lib/api"
     import type { Verse } from "json-bible/lib/Bible"
@@ -589,6 +590,13 @@
             freezeInput = null
         } else if (freezeInput) {
             searchValue = freezeInput
+            return
+        }
+
+        // cultoOS: Brazilian reference formats ("jo 3 16" -> "João 3:16"); the reassignment triggers a new search
+        const normalizedValue = normalizeReference(searchValue, books || [])
+        if (normalizedValue !== searchValue) {
+            searchValue = normalizedValue
             return
         }
 
