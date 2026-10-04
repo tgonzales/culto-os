@@ -1572,7 +1572,12 @@
         "reference_at_bottom": "Mover para o rodapé",
         "red_jesus": "Palavras de Jesus em vermelho",
         "show_all": "Mostrar tudo",
-        "search": "Procurar na Bíblia"
+        "search": "Procurar na Bíblia",
+        "highlight": "Destacar",
+        "highlight_tip": "Destacar palavras do versículo selecionado no telão",
+        "highlight_whole": "versículo inteiro",
+        "highlight_clear": "Limpar destaques",
+        "highlight_empty": "Selecione um versículo para destacar as palavras."
     },
     "filter": {
         "blur": "Borrão",

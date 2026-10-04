@@ -1,3 +1,4 @@
+import { highlightKey, highlightStyle, scriptureHighlights, splitByHighlight } from "./highlights"
 import JsonBible from "json-bible"
 import { ApiBiblesList, ApiBible as JsonBibleApi } from "json-bible/lib/api"
 import type { CustomBibleListContent } from "json-bible/lib/api/ApiBible"
@@ -888,7 +889,7 @@ export async function getScriptureSlidesNew(data: any, onlyOne = false, disableR
     if (Number(baseFontSize?.[1])) verseNumberSize = Number(baseFontSize?.[1]) * percentageDiff
 
     // slide > translation > verse
-    let scriptureVerseContent: { number: string; text: string; verseId: string }[][][] = []
+    let scriptureVerseContent: { number: string; text: string; verseId: string; highlightKey?: string }[][][] = []
 
     const fullVerses = buildFullReferenceRange(selectedChapters, selectedVerses)
     const fullReference = `${biblesContent[0]?.book} ${fullVerses}`.trim()
@@ -947,7 +948,7 @@ export async function getScriptureSlidesNew(data: any, onlyOne = false, disableR
                         number = verseNumberValue
                     }
 
-                    scriptureVerseContent[i][j].push({ number, text, verseId })
+                    scriptureVerseContent[i][j].push({ number, text, verseId, highlightKey: highlightKey(bible.book, chapterNumber, v) })
                 })
             })
 
@@ -1106,6 +1107,21 @@ export async function getScriptureSlidesNew(data: any, onlyOne = false, disableR
                                 })
                             }
 
+                            // cultoOS: words picked in the highlight panel are emphasized
+                            const highlight = get(scriptureHighlights)[verse.highlightKey || ""]
+                            const highlightedStyle = highlightStyle(get(scriptureSettings).highlightColor)
+                            const pushVerseText = (value: string, extra: { style?: string; customType?: string } = {}) => {
+                                splitByHighlight(value, highlight).forEach((part) => {
+                                    newLineText.push({
+                                        ...keyTextObj,
+                                        value: part.value,
+                                        sourceDynamicKey: `${valueName}:${i}`,
+                                        ...extra,
+                                        ...(part.highlighted && { style: (extra.style ?? keyTextObj.style ?? "") + highlightedStyle, customType: "disableTemplate_jw" })
+                                    })
+                                })
+                            }
+
                             // Verse text with Jesus words formatting
                             if (get(scriptureSettings).redJesus && verseText.includes("!{")) {
                                 verseText.split(/(!?\{[^}]*\}!?)/g).forEach((seg) => {
@@ -1119,15 +1135,10 @@ export async function getScriptureSlidesNew(data: any, onlyOne = false, disableR
                                     const value = leading + text + trailing
                                     if (!value) return
 
-                                    newLineText.push({
-                                        ...keyTextObj,
-                                        value,
-                                        sourceDynamicKey: `${valueName}:${i}`,
-                                        ...(isJesusWords && { style: (keyTextObj.style || "") + redJesusStyle, customType: "disableTemplate_jw" })
-                                    })
+                                    pushVerseText(value, isJesusWords ? { style: (keyTextObj.style || "") + redJesusStyle, customType: "disableTemplate_jw" } : {})
                                 })
                             } else {
-                                newLineText.push({ ...keyTextObj, value: formatBibleText(verseText), sourceDynamicKey: `${valueName}:${i}` })
+                                pushVerseText(formatBibleText(verseText))
                             }
 
                             // Separator between verses (don't break verses in multiple parts)

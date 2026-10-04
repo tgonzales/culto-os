@@ -23,6 +23,7 @@
     import TextInput from "../../inputs/TextInput.svelte"
     import Loader from "../../main/Loader.svelte"
     import Center from "../../system/Center.svelte"
+    import { buildHighlight, highlightKey, isEmptyHighlight, plainVerseWords, scriptureHighlights } from "./highlights"
     import { createScriptureShow, formatBibleText, getShortBibleName, getVerseIdParts, getVersePartLetter, joinRange, loadJsonBible, moveSelection, outputIsScripture, playScripture, sanitizeVerseText, scriptureRangeSelect, sortScriptureSelection, splitText, swapPreviewBible } from "./scripture"
 
     export let active: string | null
@@ -166,6 +167,43 @@
     }
 
     $: isActiveInOutput = outputIsScripture($outputs)
+
+    // ----- cultoOS: quick highlights -----
+    let highlightOpen = false
+    $: currentBookName = books?.find((b: any) => b.number?.toString() === activeReference.book?.toString())?.name || ""
+    $: currentChapter = activeReference.chapters[activeReference.chapters.length - 1]
+    $: lastSelection = (activeReference.verses[activeReference.verses.length - 1] || []).map((a) => a.toString())
+    $: highlightVerses = splittedVerses
+        .filter((content) => lastSelection.includes(content.id.toString()))
+        .map((content) => ({ id: content.id, words: plainVerseWords(formatBibleText(content.text)), key: highlightKey(currentBookName, currentChapter, content.id) }))
+    $: hasHighlights = Object.values($scriptureHighlights).some((h) => !isEmptyHighlight(h))
+
+    function updateHighlight(key: string, words: string[], selected: number[], all: boolean) {
+        scriptureHighlights.update((a) => {
+            const highlight = buildHighlight(words, selected, all)
+            if (isEmptyHighlight(highlight)) delete a[key]
+            else a[key] = highlight
+            return a
+        })
+        if (isActiveInOutput) playScripture()
+    }
+
+    function toggleWord(verse: { key: string; words: string[] }, index: number) {
+        const current = $scriptureHighlights[verse.key]
+        const selected = current?.words || []
+        const next = selected.includes(index) ? selected.filter((i) => i !== index) : [...selected, index]
+        updateHighlight(verse.key, verse.words, next, false)
+    }
+
+    function toggleWhole(verse: { key: string; words: string[] }) {
+        const current = $scriptureHighlights[verse.key]
+        updateHighlight(verse.key, verse.words, [], !current?.all)
+    }
+
+    function clearHighlights() {
+        scriptureHighlights.set({})
+        if (isActiveInOutput) playScripture()
+    }
 
     type Reference = {
         book: number | string | null
@@ -1284,6 +1322,12 @@
             </MaterialButton>
         {/if}
 
+        <div class="divider" />
+
+        <MaterialButton isActive={highlightOpen} title="scripture.highlight_tip" on:click={() => (highlightOpen = !highlightOpen)}>
+            <Icon size={1.1} id="star" white={!hasHighlights} />
+        </MaterialButton>
+
         <!-- content search is not supported for YouVersion Bibles (at the moment)-->
         <MaterialButton title="scripture.search [Ctrl+B]" disabled={typeof $scriptures[activeScriptureId]?.id === "string" ? $scriptures[activeScriptureId].id.includes("YOUVERSION") : false} on:click={() => (contentSearchFieldActive = true)}>
             <Icon size={1.1} id="search" white />
@@ -1291,7 +1335,95 @@
     </FloatingInputs>
 {/if}
 
+{#if highlightOpen}
+    <div class="highlightPanel">
+        <div class="highlightHeader">
+            <span><T id="scripture.highlight" /></span>
+            <span style="display: flex;gap: 4px;">
+                {#if hasHighlights}
+                    <MaterialButton small on:click={clearHighlights}><T id="scripture.highlight_clear" /></MaterialButton>
+                {/if}
+                <MaterialButton small icon="close" title="actions.close" on:click={() => (highlightOpen = false)} />
+            </span>
+        </div>
+
+        {#if !highlightVerses.length}
+            <p class="highlightEmpty"><T id="scripture.highlight_empty" /></p>
+        {/if}
+
+        {#each highlightVerses as verse}
+            {@const current = $scriptureHighlights[verse.key]}
+            <div class="highlightVerse">
+                <button class="highlightWhole" class:active={current?.all} on:click={() => toggleWhole(verse)}>{verse.id.toString().split("_")[0]} · <T id="scripture.highlight_whole" /></button>
+                <div class="highlightWords">
+                    {#each verse.words as word, index}
+                        <button class="highlightWord" class:active={current?.all || current?.words.includes(index)} on:click={() => toggleWord(verse, index)}>{word}</button>
+                    {/each}
+                </div>
+            </div>
+        {/each}
+    </div>
+{/if}
+
 <style>
+    .highlightPanel {
+        position: absolute;
+        right: 10px;
+        bottom: 60px;
+        width: min(520px, calc(100% - 20px));
+        max-height: 60%;
+        overflow-y: auto;
+        z-index: 10;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background-color: var(--primary-darker);
+        border: 1px solid var(--primary-lighter);
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+    }
+    .highlightHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .highlightEmpty {
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+    .highlightVerse {
+        padding: 6px 0;
+        border-top: 1px solid var(--primary-lighter);
+    }
+    .highlightWords {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 6px;
+    }
+    .highlightWord,
+    .highlightWhole {
+        font: inherit;
+        font-size: 0.9em;
+        color: var(--text);
+        background: var(--primary-lighter);
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 3px 8px;
+        cursor: pointer;
+    }
+    .highlightWhole {
+        background: transparent;
+        border-color: var(--primary-lighter);
+        opacity: 0.85;
+    }
+    .highlightWord.active,
+    .highlightWhole.active {
+        background: var(--secondary);
+        color: var(--secondary-text);
+        opacity: 1;
+    }
+
     .main {
         display: flex;
         height: 100%;

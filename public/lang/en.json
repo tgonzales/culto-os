@@ -1608,7 +1608,12 @@
         "reference_at_bottom": "Move to bottom",
         "red_jesus": "Jesus words in red",
         "show_all": "Show all",
-        "search": "Search in the Bible"
+        "search": "Search in the Bible",
+        "highlight": "Highlight",
+        "highlight_tip": "Highlight words of the selected verse on the output",
+        "highlight_whole": "whole verse",
+        "highlight_clear": "Clear highlights",
+        "highlight_empty": "Select a verse to highlight its words."
     },
     "filter": {
         "blur": "Blur",
