@@ -1,4 +1,5 @@
 import { get } from "svelte/store"
+import { BRAND } from "../../types/Brand"
 import { OUTPUT } from "../../types/Channels"
 import type { DropdownOptions } from "../../types/Input"
 import { Main } from "../../types/IPC/Main"
@@ -29,6 +30,9 @@ function setLanguage(locale = "", init = false) {
         Object.keys(replace).forEach((key) => {
             if (replace[key].includes(locale)) locale = key
         })
+
+        // cultoOS: default to the brand language unless the system uses another supported (non-English) language
+        if (!replace[locale] || locale.startsWith("en")) locale = BRAND.defaultLanguage
     }
 
     if (!replace[locale]) locale = "en"

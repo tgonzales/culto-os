@@ -3,6 +3,8 @@
 
 export const BRAND = {
     name: "cultoOS",
+    // used when the system language is English or not supported
+    defaultLanguage: "pt_BR",
     // used for folders on disk (Documents/<folderName>)
     folderName: "cultoOS",
     // file name prefixes (recordings, exports)
