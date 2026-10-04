@@ -93,7 +93,9 @@ export const defaultSettings: { [key in SaveListSettings]: any } = {
 export const defaultSyncedSettings: { [key in SaveListSyncedSettings]: any } = {
     categories: {
         song: { name: "category.song", icon: "song", default: true },
-        presentation: { name: "category.presentation", icon: "presentation", default: true }
+        presentation: { name: "category.presentation", icon: "presentation", default: true },
+        // cultoOS: dedicated category for church announcements
+        notice: { name: "category.notice", icon: "info", default: true }
     },
     drawSettings: {},
     overlayCategories: {
