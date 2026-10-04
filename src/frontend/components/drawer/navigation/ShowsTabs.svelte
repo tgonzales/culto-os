@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { TrimmedShow } from "../../../../types/Show"
-    import { activeProfile, categories, drawerTabsData, labelsDisabled, shows } from "../../../stores"
+    import { activeProfile, categories, drawerTabsData, labelsDisabled, shows, special } from "../../../stores"
     import { hasNewerUpdate } from "../../../utils/common"
     import { getAccess } from "../../../utils/profile"
     import { keysToID, sortObject } from "../../helpers/array"
@@ -29,6 +29,7 @@
     $: allVisibleShows = currentShows.filter((a) => a && !a.private && profile[a.category || ""] !== "none")
     $: unarchivedShows = allVisibleShows.filter((a) => a.category === null || !$categories[a.category]?.isArchive)
     // $: archivedShows = currentShows.filter((a) => a.category !== null && $categories[a.category]?.isArchive)
+    $: favouriteShowsLength = ($special.favouriteShows || []).filter((id: string) => $shows[id] && !$shows[id].private && profile[$shows[id].category || ""] !== "none").length
     $: uncategorizedShowsLength = unarchivedShows.filter((a) => a.category === null || !$categories[a.category]).length
     // $: lockedShowsLength = allVisibleShows.filter((a) => a.locked).length
     // $: songNumberShowsLength = allVisibleShows.filter((a) => a.quickAccess?.number).length
@@ -37,6 +38,7 @@
     $: sections = [
         [
             { id: "all", label: "category.all", icon: "all", count: unarchivedShows.length },
+            { id: "favourites", label: "category.favourites", icon: "star", count: favouriteShowsLength, hidden: !favouriteShowsLength && activeSubTab !== "favourites" },
             // { id: "number", label: "meta.number", icon: "number", count: songNumberShowsLength, hidden: !songNumberShowsLength },
             // { id: "locked", label: "output.state_locked", icon: "locked", count: lockedShowsLength, hidden: !lockedShowsLength },
             { id: "unlabeled", label: "category.unlabeled", icon: "noIcon", count: uncategorizedShowsLength, hidden: !uncategorizedShowsLength && activeSubTab !== "unlabeled" } // , boxedIcon: true

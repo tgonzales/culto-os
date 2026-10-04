@@ -1721,6 +1721,20 @@ const clickActions = {
     favourite: (obj: ObjData) => {
         if (!obj.sel) return
 
+        // cultoOS: favourite shows (songs) are stored as a list of show ids
+        if (obj.sel.id === "show_drawer") {
+            const ids: string[] = obj.sel.data.map((a) => a.id)
+            const current: string[] = get(special).favouriteShows || []
+            const isFavourite = !current.includes(ids[0])
+            special.update((a) => {
+                const list = new Set<string>(a.favouriteShows || [])
+                ids.forEach((id) => (isFavourite ? list.add(id) : list.delete(id)))
+                a.favouriteShows = [...list]
+                return a
+            })
+            return
+        }
+
         if (obj.sel.id === "category_scripture") {
             const isFavourite = get(scriptures)[obj.sel.data[0]]?.favorite !== true
             scriptures.update((a) => {

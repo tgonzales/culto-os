@@ -1,7 +1,47 @@
 <script lang="ts">
     import { AudioPlayer } from "../../audio/audioPlayer"
     import { cameraManager } from "../../media/cameraManager"
-    import { actions, activeEdit, activeProject, activeRecording, activeShow, categories, colorbars, dictionary, disabledServers, drawerTabsData, effects, effectsLibrary, events, forceClock, globalTags, livePrepare, media, mediaFolders, os, outputs, overlayCategories, overlays, projects, redoHistory, scenes, scriptures, selected, shows, showsCache, slideDeleteHighlight, slidesOptions, special, spellcheck, stageShows, styles, templateCategories, timers, topContextActive, undoHistory } from "../../stores"
+    import {
+        actions,
+        activeEdit,
+        activeProject,
+        activeRecording,
+        activeShow,
+        categories,
+        colorbars,
+        dictionary,
+        disabledServers,
+        drawerTabsData,
+        effects,
+        effectsLibrary,
+        events,
+        forceClock,
+        globalTags,
+        livePrepare,
+        media,
+        mediaFolders,
+        os,
+        outputs,
+        overlayCategories,
+        overlays,
+        projects,
+        redoHistory,
+        scenes,
+        scriptures,
+        selected,
+        shows,
+        showsCache,
+        slideDeleteHighlight,
+        slidesOptions,
+        special,
+        spellcheck,
+        stageShows,
+        styles,
+        templateCategories,
+        timers,
+        topContextActive,
+        undoHistory
+    } from "../../stores"
     import { translateText } from "../../utils/language"
     import { closeContextMenu } from "../../utils/shortcuts"
     import { keysToID } from "../helpers/array"
@@ -239,7 +279,9 @@
             disabled = true
         },
         favourite: () => {
-            if ($selected.id?.includes("category_scripture")) {
+            if ($selected.id === "show_drawer") {
+                enabled = ($special.favouriteShows || []).includes($selected.data[0]?.id)
+            } else if ($selected.id?.includes("category_scripture")) {
                 let id = $selected.data[0]
                 enabled = !!$scriptures[id]?.favorite
             } else {
