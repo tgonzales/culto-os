@@ -3,7 +3,10 @@
     import { Main } from "../../../../types/IPC/Main"
     import { requestMain, sendMain } from "../../../IPC/main"
     import { activePopup, dataPath, dictionary, guideActive, language, popupData, timeFormat } from "../../../stores"
+    import { BRAND } from "../../../../types/Brand"
+    import { newToast } from "../../../utils/common"
     import { createData } from "../../../utils/createData"
+    import { pairCultoos, prepareSampleService } from "../../../utils/cultoosCloud"
     import { getLanguageList, setLanguage, translateText } from "../../../utils/language"
     import Icon from "../../helpers/Icon.svelte"
     import T from "../../helpers/T.svelte"
@@ -12,10 +15,16 @@
     import MaterialButton from "../../inputs/MaterialButton.svelte"
     import MaterialDropdown from "../../inputs/MaterialDropdown.svelte"
     import MaterialFolderPicker from "../../inputs/MaterialFolderPicker.svelte"
+    import MaterialTextInput from "../../inputs/MaterialTextInput.svelte"
     import MaterialToggleSwitch from "../../inputs/MaterialToggleSwitch.svelte"
 
-    onMount(() => {
+    // cultoOS: optional church connection on the first run
+    let churchCode = ""
+    let deviceName = ""
+
+    onMount(async () => {
         if (!$dataPath) sendMain(Main.DATA_PATH)
+        deviceName = (await requestMain(Main.GET_DEVICE_NAME)) || ""
 
         // check time format (based on browser language)
         const locale = navigator.language
@@ -24,9 +33,19 @@
     })
 
     function create() {
-        requestMain(Main.GET_PATHS, undefined, (a) => (a ? createData(a) : null))
+        requestMain(Main.GET_PATHS, undefined, (a) => {
+            if (!a) return
+            createData(a)
+            setTimeout(prepareSampleService, 1500)
+        })
 
         sendMain(Main.REFRESH_SHOWS)
+
+        if (churchCode.trim()) {
+            pairCultoos(churchCode.trim(), deviceName.trim() || "Computador").then((result) => {
+                newToast(result?.success ? "cloud.cultoos_connected" : "cloud.cultoos_invalid_code")
+            })
+        }
 
         guideActive.set(true)
         activePopup.set(null)
@@ -67,6 +86,17 @@
 
     <MaterialFolderPicker PICK_ID="DATA_SHOWS" label={translateText("settings.data_location", $dictionary)} value={$dataPath} on:change={updateDataPath} openButton={false} />
 
+    <!-- cultoOS: connect to the church on the first run (optional) -->
+    <p style="margin: 18px 0 6px;font-size: 0.9em;opacity: 0.85;"><T id="setup.cultoos_connect" /></p>
+    <InputRow>
+        <MaterialTextInput style="width: 50%;" label="cloud.cultoos_code" value={churchCode} placeholder="ABCD-EFGH" on:change={(e) => (churchCode = e.detail)} />
+        <MaterialTextInput style="width: 50%;" label="cloud.cultoos_device_name" value={deviceName} on:change={(e) => (deviceName = e.detail)} />
+    </InputRow>
+    <p style="font-size: 0.85em;opacity: 0.7;margin-top: 6px;">
+        <T id="setup.cultoos_no_account" />
+        <button class="link" on:click={() => sendMain(Main.URL, `${BRAND.cloudUrl}/cadastro`)}><T id="setup.cultoos_create_account" /></button>
+    </p>
+
     <MaterialButton variant="outlined" class="start" style="font-size: 1.8em;padding: 15px;margin-top: 20px;" on:click={create} white>
         <Icon id="check" size={2.5} />
         <T id="setup.get_started" />
@@ -81,6 +111,16 @@
 </div>
 
 <style>
+    .link {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        color: var(--secondary);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
     .main {
         display: flex;
         flex-direction: column;

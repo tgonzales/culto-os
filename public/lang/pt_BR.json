@@ -98,11 +98,14 @@
         "change_later": "Você pode alterar essas configurações mais tarde",
         "get_started": "Vamos lá!",
         "or": "ou",
-        "restore_data": "Restaurar dados anteriores"
+        "restore_data": "Restaurar dados anteriores",
+        "cultoos_connect": "Sua igreja já usa o cultoOS? Digite o código do painel web (Computadores):",
+        "cultoos_no_account": "Ainda não tem conta da igreja?",
+        "cultoos_create_account": "Criar agora (30 dias grátis)"
     },
     "example": {
         "welcome": "Seja bem-vindo",
-        "meetings": "Reuniões",
+        "meetings": "Meus cultos",
         "example": "Exemplo",
         "example_note": "Escreva notas aqui",
         "watermark": "Marca d'água",
@@ -115,7 +118,12 @@
         "big": "Grande",
         "default": "Padrão",
         "small": "Pequeno",
-        "bold": "Negrito"
+        "bold": "Negrito",
+        "sample_service": "Culto de exemplo",
+        "opening": "Abertura",
+        "opening_note": "Boas-vindas e oração",
+        "announcements": "Avisos",
+        "announcements_note": "Use a categoria Avisos e o modelo Aviso."
     },
     "create_show": {
         "web": "Pesquisa na Web",
@@ -964,7 +972,8 @@
         "cultoos_connection_failed": "Não foi possível falar com a nuvem do cultoOS. Verifique a internet.",
         "cultoos_sync_failed": "A sincronização falhou. Vai tentar de novo sozinha.",
         "cultoos_unauthorized": "Este computador foi desconectado pelo painel web.",
-        "cultoos_plan_required": "O plano ou o teste da igreja terminou. O app continua funcionando neste computador; renove o plano no painel web para voltar a sincronizar."
+        "cultoos_plan_required": "O plano ou o teste da igreja terminou. O app continua funcionando neste computador; renove o plano no painel web para voltar a sincronizar.",
+        "cultoos_connected": "Computador conectado à igreja!"
     },
     "export": {
         "export": "Exportar",

@@ -100,7 +100,10 @@
         "change_later": "You can change these settings later",
         "get_started": "Get started!",
         "or": "or",
-        "restore_data": "Restore previous data"
+        "restore_data": "Restore previous data",
+        "cultoos_connect": "Church already on cultoOS? Type the code from the web panel (Computers):",
+        "cultoos_no_account": "No church account yet?",
+        "cultoos_create_account": "Create one (30 days free)"
     },
     "example": {
         "welcome": "Welcome",
@@ -117,7 +120,12 @@
         "big": "Big",
         "default": "Default",
         "small": "Small",
-        "bold": "Bold"
+        "bold": "Bold",
+        "sample_service": "Sample service",
+        "opening": "Opening",
+        "opening_note": "Welcome and opening prayer",
+        "announcements": "Announcements",
+        "announcements_note": "Use the Announcements category and the Announcement template."
     },
     "create_show": {
         "web": "Web search",
@@ -983,7 +991,8 @@
         "cultoos_connection_failed": "Could not reach the cultoOS cloud. Check the internet connection.",
         "cultoos_sync_failed": "Sync failed. It will try again automatically.",
         "cultoos_unauthorized": "This computer was disconnected in the web panel.",
-        "cultoos_plan_required": "The church plan or trial has ended. The app keeps working on this computer; renew the plan in the web panel to sync again."
+        "cultoos_plan_required": "The church plan or trial has ended. The app keeps working on this computer; renew the plan in the web panel to sync again.",
+        "cultoos_connected": "Computer connected to the church!"
     },
     "export": {
         "export": "Export",

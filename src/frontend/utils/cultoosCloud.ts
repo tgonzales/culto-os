@@ -11,6 +11,7 @@ import { isOutCleared } from "../components/helpers/output"
 import { loadShows } from "../components/helpers/setShow"
 import { requestMain } from "../IPC/main"
 import { activeShow, projects, saved, shows, showsCache } from "../stores"
+import { installBundledBibles } from "./bundledBibles"
 import { newToast, setStatus } from "./common"
 
 const AUTO_SYNC_INTERVAL = 2 * 60 * 1000
@@ -74,7 +75,7 @@ export async function cultoosSyncNow(manual = false) {
 
 // Bible readings added in the web panel arrive as sections with `data.scriptureRef`;
 // they become scripture slides using the Bibles installed on this computer.
-async function convertScriptureReferences() {
+export async function convertScriptureReferences() {
     const allProjects = get(projects)
     for (const [projectId, project] of Object.entries(allProjects)) {
         if (!project.shows?.some((item) => item.type === "section" && item.data?.scriptureRef)) continue
@@ -107,6 +108,12 @@ async function convertScriptureReferences() {
             return a
         })
     }
+}
+
+// First run: the sample service has a Bible reading that needs the bundled Bibles
+export async function prepareSampleService() {
+    await installBundledBibles()
+    await convertScriptureReferences()
 }
 
 let timer: ReturnType<typeof setInterval> | null = null

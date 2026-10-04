@@ -45,12 +45,19 @@ export function createData(paths: MainFilePaths) {
         a.default = { name: translateText("example.meetings"), parent: "/" }
         return a
     })
+    // cultoOS: a ready sample service so the operator sees how a culto is organized
     projects.update((a) => {
         a.default = {
-            name: translateText("example.example"),
-            created: new Date("2022-01-01").getTime(),
+            name: translateText("example.sample_service"),
+            created: Date.now(),
             parent: "default",
-            shows: [{ id: "default" }, { id: "section", type: "section", name: translateText("example.example"), notes: translateText("example.example_note") }]
+            shows: [
+                { id: "opening", type: "section", name: translateText("example.opening"), notes: translateText("example.opening_note") },
+                { id: "default" },
+                // turned into scripture slides with the bundled Bible (cultoosCloud.convertScriptureReferences)
+                { id: "reading", type: "section", name: "João 3:16", data: { scriptureRef: "João 3:16" } },
+                { id: "announcements", type: "section", name: translateText("example.announcements"), notes: translateText("example.announcements_note") }
+            ]
         }
         return a
     })
