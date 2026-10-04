@@ -347,6 +347,8 @@ export async function cultoosSync() {
         return { success: true, pulled: pulled.length, pushed, downloadedShowIds, downloadedMedia }
     } catch (err: any) {
         if (err?.status === 401) return { success: false, error: "unauthorized" }
+        // no active plan or trial: the app keeps working offline
+        if (err?.status === 402) return { success: false, error: "plan_required" }
         console.error("cultoOS sync failed:", err)
         return { success: false, error: "sync_failed" }
     } finally {

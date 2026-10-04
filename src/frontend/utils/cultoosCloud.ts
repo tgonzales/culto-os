@@ -48,7 +48,7 @@ export async function cultoosSyncNow(manual = false) {
         const result = await requestMain(Main.CULTOOS_SYNC)
         if (!result?.success) {
             setStatus("error", 5)
-            if (manual) newToast(result?.error === "unauthorized" ? "cloud.cultoos_unauthorized" : "cloud.cultoos_sync_failed")
+            if (manual) newToast(result?.error === "unauthorized" ? "cloud.cultoos_unauthorized" : result?.error === "plan_required" ? "cloud.cultoos_plan_required" : "cloud.cultoos_sync_failed")
             if (result?.error === "unauthorized") await disconnectCultoos()
             return
         }

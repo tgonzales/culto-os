@@ -982,7 +982,8 @@
         "cultoos_invalid_code": "Invalid or expired code. Generate a new one in the web panel.",
         "cultoos_connection_failed": "Could not reach the cultoOS cloud. Check the internet connection.",
         "cultoos_sync_failed": "Sync failed. It will try again automatically.",
-        "cultoos_unauthorized": "This computer was disconnected in the web panel."
+        "cultoos_unauthorized": "This computer was disconnected in the web panel.",
+        "cultoos_plan_required": "The church plan or trial has ended. The app keeps working on this computer; renew the plan in the web panel to sync again."
     },
     "export": {
         "export": "Export",
