@@ -1,3 +1,4 @@
+import { cultoosDisconnect, cultoosPair, cultoosStatus, cultoosSync } from "../cloud/cultoos"
 import type { BrowserWindow, DesktopCapturerSource } from "electron"
 import { app, desktopCapturer, screen, shell, systemPreferences } from "electron"
 import os from "os"
@@ -184,6 +185,10 @@ export const mainResponses: MainResponses = {
     [Main.CLOUD_DATA]: (data) => hasTeamData(data),
     [Main.CLOUD_CHANGED]: (data) => hasDataChanged(data),
     [Main.CLOUD_SYNC]: (data) => syncData(data),
+    [Main.CULTOOS_PAIR]: (data) => cultoosPair(data),
+    [Main.CULTOOS_STATUS]: () => cultoosStatus(),
+    [Main.CULTOOS_DISCONNECT]: () => cultoosDisconnect(),
+    [Main.CULTOOS_SYNC]: () => cultoosSync(),
     [Main.RESTORE_CLOUD_BACKUP]: (data) => restoreCloudBackup(data),
     [Main.GET_CONVERSATION_ID]: (data) => getConversationId(data.teamId),
     [Main.SEND_SOCKET_MESSAGE]: (data) => sendSocketMessage(data),

@@ -1,3 +1,4 @@
+import { cultoosSyncNow } from "./cultoosCloud"
 import { get } from "svelte/store"
 import { Main } from "../../types/IPC/Main"
 import type { Projects } from "../../types/Projects"
@@ -298,6 +299,9 @@ export async function saveComplete({ closeWhenFinished, customTriggers }: { clos
 
         saved.set(true)
         console.info("SAVED!")
+
+        // cultoOS cloud: send the saved changes right away
+        if (!customTriggers?.backup && !customTriggers?.reset) cultoosSyncNow()
     }
 
     // cloud sync (only when autosaving or closing)

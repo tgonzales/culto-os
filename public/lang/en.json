@@ -971,7 +971,18 @@
         "local": "Local",
         "syncing": "Syncing to cloud",
         "sync_complete": "Sync completed",
-        "restore_weekly_backup": "Restore sync state from a week ago"
+        "restore_weekly_backup": "Restore sync state from a week ago",
+        "cultoos_info": "Connect this computer to your church: in the cultoOS web panel go to Computers, generate a code and type it here.",
+        "cultoos_code": "Connection code",
+        "cultoos_device_name": "Computer name",
+        "cultoos_connect": "Connect",
+        "cultoos_disconnect": "Disconnect",
+        "cultoos_disconnect_confirm": "Disconnect this computer from the church cloud? Local data stays on this computer.",
+        "cultoos_last_sync": "Last sync",
+        "cultoos_invalid_code": "Invalid or expired code. Generate a new one in the web panel.",
+        "cultoos_connection_failed": "Could not reach the cultoOS cloud. Check the internet connection.",
+        "cultoos_sync_failed": "Sync failed. It will try again automatically.",
+        "cultoos_unauthorized": "This computer was disconnected in the web panel."
     },
     "export": {
         "export": "Export",

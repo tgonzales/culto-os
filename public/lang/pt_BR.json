@@ -952,7 +952,18 @@
         "local": "Local",
         "syncing": "Sincronizando com a nuvem",
         "sync_complete": "Sincronização completa",
-        "restore_weekly_backup": "Restaurar backup semanal"
+        "restore_weekly_backup": "Restaurar backup semanal",
+        "cultoos_info": "Conecte este computador à sua igreja: no painel web do cultoOS, vá em Computadores, gere um código e digite aqui.",
+        "cultoos_code": "Código de conexão",
+        "cultoos_device_name": "Nome do computador",
+        "cultoos_connect": "Conectar",
+        "cultoos_disconnect": "Desconectar",
+        "cultoos_disconnect_confirm": "Desconectar este computador da nuvem da igreja? Os dados continuam neste computador.",
+        "cultoos_last_sync": "Última sincronização",
+        "cultoos_invalid_code": "Código inválido ou expirado. Gere um novo no painel web.",
+        "cultoos_connection_failed": "Não foi possível falar com a nuvem do cultoOS. Verifique a internet.",
+        "cultoos_sync_failed": "A sincronização falhou. Vai tentar de novo sozinha.",
+        "cultoos_unauthorized": "Este computador foi desconectado pelo painel web."
     },
     "export": {
         "export": "Exportar",

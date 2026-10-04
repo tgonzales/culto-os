@@ -20,6 +20,7 @@
     import MaterialFolderPicker from "../../inputs/MaterialFolderPicker.svelte"
     import MaterialTextInput from "../../inputs/MaterialTextInput.svelte"
     import MaterialToggleSwitch from "../../inputs/MaterialToggleSwitch.svelte"
+    import CultoosCloud from "./CultoosCloud.svelte"
 
     function updateSpecial(value, key) {
         special.update((a) => {
@@ -281,7 +282,12 @@
 <!-- cloud -->
 <Title label="settings.cloud" icon="cloud" title="cloud.info" />
 
-{#if !$providerConnections.churchApps || (!$special.churchAppsCloudOnly && !$cloudSyncData.enabled)}
+<!-- cultoOS cloud (the ChurchApps sync is only shown in advanced mode) -->
+<CultoosCloud />
+
+{#if !$special.advancedMode && !$providerConnections.churchApps}
+    <!-- hidden -->
+{:else if !$providerConnections.churchApps || (!$special.churchAppsCloudOnly && !$cloudSyncData.enabled)}
     <InputRow>
         <MaterialButton on:click={() => contentProviderConnect("churchApps")} style="flex: 1;" icon="login">
             <T id="settings.connect_to" replace={["ChurchApps"]} />

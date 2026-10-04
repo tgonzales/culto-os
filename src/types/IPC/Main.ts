@@ -148,6 +148,11 @@ export enum Main {
     CLOUD_DATA = "CLOUD_DATA",
     CLOUD_CHANGED = "CLOUD_CHANGED",
     CLOUD_SYNC = "CLOUD_SYNC",
+    // cultoOS cloud
+    CULTOOS_PAIR = "CULTOOS_PAIR",
+    CULTOOS_STATUS = "CULTOOS_STATUS",
+    CULTOOS_DISCONNECT = "CULTOOS_DISCONNECT",
+    CULTOOS_SYNC = "CULTOOS_SYNC",
     RESTORE_CLOUD_BACKUP = "RESTORE_CLOUD_BACKUP",
     GET_CONVERSATION_ID = "GET_CONVERSATION_ID",
     SEND_SOCKET_MESSAGE = "SEND_SOCKET_MESSAGE",
@@ -268,6 +273,7 @@ export interface MainSendPayloads {
     [Main.CLOUD_DATA]: { id: SyncProviderId; churchId: string; teamId: string }
     [Main.CLOUD_CHANGED]: { id: SyncProviderId; churchId: string; teamId: string }
     [Main.CLOUD_SYNC]: { id: SyncProviderId; churchId: string; teamId: string; method: "merge" | "read_only" | "upload" | "replace" }
+    [Main.CULTOOS_PAIR]: { code: string; deviceName: string }
     [Main.RESTORE_CLOUD_BACKUP]: { id: SyncProviderId; churchId: string; teamId: string }
     [Main.GET_CONVERSATION_ID]: { teamId: string }
     [Main.SEND_SOCKET_MESSAGE]: { churchId: string; teamId: string; displayName: string; content: string }
@@ -387,6 +393,10 @@ export interface MainReturnPayloads {
     [Main.CLOUD_DATA]: Promise<boolean>
     [Main.CLOUD_CHANGED]: Promise<boolean>
     [Main.CLOUD_SYNC]: Promise<{ success?: boolean; error?: string; changedFiles?: any[]; downloadedShowIds?: string[]; replacedShows?: string[] }>
+    [Main.CULTOOS_PAIR]: Promise<{ success: boolean; churchName?: string; error?: string }>
+    [Main.CULTOOS_STATUS]: { connected: boolean; churchName: string; deviceName: string; lastSync: number; url: string }
+    [Main.CULTOOS_DISCONNECT]: { success: boolean }
+    [Main.CULTOOS_SYNC]: Promise<{ success: boolean; error?: string; pulled?: number; pushed?: number; downloadedShowIds?: string[] }>
     [Main.GET_CONVERSATION_ID]: Promise<string | null>
     [Main.SEND_SOCKET_MESSAGE]: Promise<boolean>
     // Provider-based routing

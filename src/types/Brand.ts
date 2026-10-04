@@ -10,6 +10,8 @@ export const BRAND = {
     // file name prefixes (recordings, exports)
     filePrefix: "cultoOS",
     website: "",
+    // cultoOS cloud (web panel + sync API); override with the CULTOOS_CLOUD_URL env var in development
+    cloudUrl: "https://culto-os-cloud.vercel.app",
     docsUrl: "",
     supportEmail: "",
     sourceUrl: "https://github.com/tgonzales/culto-os",

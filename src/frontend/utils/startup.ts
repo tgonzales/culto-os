@@ -10,6 +10,7 @@ import { cameraManager } from "../media/cameraManager"
 import { activePopup, activeProfile, alertMessage, cachePath, cloudSyncData, contentProviderData, currentWindow, dataPath, deviceId, driveKeys, isDev, loaded, loadedState, os, profiles, providerConnections, shows, special, version, windowState } from "../stores"
 import { startTracking } from "./analytics"
 import { installBundledBibles } from "./bundledBibles"
+import { startCultoosCloud } from "./cultoosCloud"
 import { setupCloudSync } from "./cloudSync"
 import { wait, waitUntilValueIsDefined } from "./common"
 import { getDefaultElements } from "./createData"
@@ -74,6 +75,7 @@ async function startupMain() {
     storeSubscriber()
     remoteListen()
     installBundledBibles()
+    startCultoosCloud()
 
     const hasProfiles = Object.keys(get(profiles)).filter((a) => a !== "admin").length > 0
     if (!hasProfiles || get(activeProfile) !== null) checkStartupActions()

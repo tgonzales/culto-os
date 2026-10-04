@@ -46,6 +46,8 @@ export const storeFilesData = {
 
     CACHE: { fileName: "cache", portable: false, defaults: {} as any, minify: true },
     CACHE_SYNC: { fileName: "cache_sync", portable: false, defaults: {} as any, minify: true },
+    // cultoOS cloud sync ledger (cursor + hash of what was last sent/received per record)
+    CULTOOS_SYNC: { fileName: "cultoos_sync", portable: false, defaults: { cursor: 0, hashes: {} } as any, minify: true },
     USAGE: { fileName: "usage", portable: false, defaults: {} as { all: any[] }, minify: true },
     ERROR_LOG: { fileName: "error_log", portable: false, defaults: {} as { renderer?: ErrorLog[]; main?: ErrorLog[]; request?: ErrorLog[] } },
 
