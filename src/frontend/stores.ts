@@ -330,7 +330,7 @@ export const scriptureSettings: Writable<any> = writable({
     showVersion: false,
     showVerse: true,
     referenceDivider: ":",
-    splitLongVerses: false,
+    splitLongVerses: true,
     longVersesChars: 100,
     longVersesTolerance: 0,
     splitLongVersesSuffix: false,
