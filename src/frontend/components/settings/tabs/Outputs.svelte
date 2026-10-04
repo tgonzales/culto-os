@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { BRAND } from "../../../../types/Brand"
     import { onDestroy } from "svelte"
     import { uid } from "uid"
     import { BLACKMAGIC, NDI, OMT, OUTPUT } from "../../../../types/Channels"
@@ -426,7 +427,7 @@
     </InputRow>
 
     <InputRow>
-        <MaterialTextInput label="inputs.name" value={currentOutput.ndiData?.name || `FreeShow NDI${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} defaultValue={`FreeShow NDI${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} on:change={(e) => updateNdiData(e.detail, "name")} />
+        <MaterialTextInput label="inputs.name" value={currentOutput.ndiData?.name || `${BRAND.name} NDI${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} defaultValue={`${BRAND.name} NDI${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} on:change={(e) => updateNdiData(e.detail, "name")} />
         <MaterialTextInput label="inputs.group" title="settings.comma_seperated" value={currentOutput.ndiData?.groups || ""} defaultValue="" placeholder="public" on:change={(e) => updateNdiData(e.detail, "groups")} />
     </InputRow>
 
@@ -452,7 +453,7 @@
     </InputRow>
 
     <InputRow>
-        <MaterialTextInput label="inputs.name" value={currentOutput.omtData?.name || `FreeShow OMT${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} defaultValue={`FreeShow OMT${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} on:change={(e) => updateOmtData(e.detail, "name")} />
+        <MaterialTextInput label="inputs.name" value={currentOutput.omtData?.name || `${BRAND.name} OMT${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} defaultValue={`${BRAND.name} OMT${currentOutput.name ? ` - ${currentOutput.name}` : ""}`} on:change={(e) => updateOmtData(e.detail, "name")} />
         <MaterialDropdown label="settings.quality" value={currentOutput.omtData?.quality || "Default"} defaultValue="Default" options={omtQualities} on:change={(e) => updateOmtData(e.detail, "quality")} />
     </InputRow>
 

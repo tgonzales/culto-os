@@ -2,6 +2,7 @@ import { get } from "svelte/store"
 import { uid } from "uid"
 import { EXPORT, OUTPUT } from "../../../types/Channels"
 import type { HistoryPages } from "../../../types/History"
+import { BRAND } from "../../../types/Brand"
 import { Main } from "../../../types/IPC/Main"
 import type { MediaStyle, Selected, SelectIds } from "../../../types/Main"
 import type { Item, LayoutRef, SlideData } from "../../../types/Show"
@@ -248,7 +249,9 @@ const clickActions = {
     paste: (obj: ObjData) => paste(null, {}, obj.contextElem),
     // view
     // help
-    docs: () => sendMain(Main.URL, "https://freeshow.app/docs"),
+    docs: () => {
+        if (BRAND.docsUrl) sendMain(Main.URL, BRAND.docsUrl)
+    },
     shortcuts: () => activePopup.set("shortcuts"),
     about: () => activePopup.set("about"),
     quick_search: () => quickSearchActive.set(true),

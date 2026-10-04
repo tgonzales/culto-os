@@ -12,7 +12,7 @@
 
     initSocket()
 
-    const freeshowLogo = new URL("../../../public/import-logos/freeshow.webp", import.meta.url).href
+    const brandLogo = new URL("../../../public/brand-logo.png", import.meta.url).href
 
     let inputPassword: string = ""
 
@@ -127,7 +127,7 @@
     <div class="auth-page">
         <div class="panel">
             <div class="brand">
-                <h1>{$passwordRequiredLayout.name || "StageShow"}</h1>
+                <h1>{$passwordRequiredLayout.name || "cultoOS Stage"}</h1>
             </div>
 
             <form on:submit|preventDefault={submitPassword} class="auth-form">
@@ -165,8 +165,8 @@
     <div class="auth-page">
         <div class="panel" style="align-items: center; text-align: center;">
             <div class="brand">
-                <img class="logo" src={freeshowLogo} alt="FreeShow logo" draggable="false" />
-                <h1>StageShow</h1>
+                <img class="logo" src={brandLogo} alt="cultoOS logo" draggable="false" />
+                <h1>cultoOS Stage</h1>
             </div>
             <p style="opacity: 0.7; font-size: 0.95em;">{translate("remote.loading", $dictionary, "Loading...")}</p>
         </div>
@@ -176,8 +176,8 @@
         <div class="auth-page">
             <div class="panel">
                 <div class="brand">
-                    <img class="logo" src={freeshowLogo} alt="FreeShow logo" draggable="false" />
-                    <h1>StageShow</h1>
+                    <img class="logo" src={brandLogo} alt="cultoOS logo" draggable="false" />
+                    <h1>cultoOS Stage</h1>
                 </div>
 
                 <div class="stage-selection-list">
@@ -200,8 +200,8 @@
         <div class="auth-page">
             <div class="panel" style="align-items: center; text-align: center;">
                 <div class="brand">
-                    <img class="logo" src={freeshowLogo} alt="FreeShow logo" draggable="false" />
-                    <h1>StageShow</h1>
+                    <img class="logo" src={brandLogo} alt="cultoOS logo" draggable="false" />
+                    <h1>cultoOS Stage</h1>
                 </div>
                 <p style="opacity: 0.6; padding: 12px 0;">{translate("empty.shows", $dictionary, "No stage layouts found")}</p>
             </div>

@@ -1,3 +1,4 @@
+import { BRAND } from "../../types/Brand"
 import { join } from "path"
 import { Worker } from "worker_threads"
 import { toApp } from ".."
@@ -75,7 +76,7 @@ export class OmtSender {
     }
 
     static initNameOMT(name?: string, outputName?: string) {
-        return name || `FreeShow OMT${outputName ? ` - ${outputName}` : ""}`
+        return name || `${BRAND.name} OMT${outputName ? ` - ${outputName}` : ""}`
     }
 
     static isBusyOMT(id: string): boolean {

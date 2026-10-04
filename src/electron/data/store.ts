@@ -2,6 +2,7 @@
 // Get all user configs
 // https://www.npmjs.com/package/electron-store
 
+import { BRAND } from "../../types/Brand"
 import Store from "electron-store"
 import { mkdirSync, statSync } from "fs"
 import path from "path"
@@ -146,7 +147,7 @@ function getWritableConfigPath(previousLocation?: string | null, setup = false):
     if (setup && previousLocation) return previousLocation
 
     const downloadsPath = getMediaFolderPath("downloads")
-    const downloadsDataPath = downloadsPath ? path.join(downloadsPath, "FreeShow") : ""
+    const downloadsDataPath = downloadsPath ? path.join(downloadsPath, BRAND.folderName) : ""
 
     const candidates = [getDataFolderRoot(), previousLocation || getDefaultDataFolderRoot(), downloadsDataPath, appDataPath].filter((p): p is string => !!p)
     const uniqueCandidates = [...new Set(candidates)]

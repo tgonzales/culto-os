@@ -5,7 +5,7 @@
     import { send } from "../util/socket"
     import { _get, _update, dictionary, password } from "../util/stores"
 
-    const freeshowLogo = new URL("../../../../public/import-logos/freeshow.webp", import.meta.url).href
+    const brandLogo = new URL("../../../../public/brand-logo.png", import.meta.url).href
 
     function submit() {
         const password = _get("password").stored
@@ -17,8 +17,8 @@
 <div class="auth-page">
     <div class="panel">
         <div class="brand">
-            <img class="logo" src={freeshowLogo} alt="FreeShow logo" draggable="false" />
-            <h1>RemoteShow</h1>
+            <img class="logo" src={brandLogo} alt="cultoOS logo" draggable="false" />
+            <h1>cultoOS Remote</h1>
         </div>
 
         <form on:submit|preventDefault={submit} class="auth-form">

@@ -1,5 +1,6 @@
 import { app } from "electron"
 import { isMac, isProd } from ".."
+import { BRAND } from "../../types/Brand"
 import { ToMain } from "../../types/IPC/ToMain"
 import type { Dictionary } from "../../types/Settings"
 import { sendToMain } from "../IPC/main"
@@ -63,13 +64,7 @@ export function template(strings: Dictionary): any {
 
     const helpMenu = {
         label: strings.titlebar?.help || "Help",
-        submenu: [
-            { label: strings.main?.quick_search || "Quick search", click: () => mc("quick_search") },
-            { label: strings.popup?.shortcuts || "Shortcuts", click: () => mc("shortcuts") },
-            { label: strings.main?.docs || "Docs", click: () => openURL("https://freeshow.app/docs") },
-            { label: strings.guide?.start || "Quick start guide", click: () => mc("quick_start_guide") },
-            { label: strings.main?.about || "About", click: () => mc("about") }
-        ]
+        submenu: [{ label: strings.main?.quick_search || "Quick search", click: () => mc("quick_search") }, { label: strings.popup?.shortcuts || "Shortcuts", click: () => mc("shortcuts") }, BRAND.docsUrl ? { label: strings.main?.docs || "Docs", click: () => openURL(BRAND.docsUrl) } : null, { label: strings.guide?.start || "Quick start guide", click: () => mc("quick_start_guide") }, { label: strings.main?.about || "About", click: () => mc("about") }].filter(Boolean)
     }
 
     // as Array<(Electron.MenuItemConstructorOptions) | (Electron.MenuItem)>

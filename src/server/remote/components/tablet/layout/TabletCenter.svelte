@@ -284,7 +284,7 @@
             </div>
         {:else}
             <div class="empty-hero">
-                <h1 class="hero-title">RemoteShow</h1>
+                <h1 class="hero-title">cultoOS Remote</h1>
                 <div class="hero-actions">
                     <button class="hero-row" type="button" on:click={newProjectCTA}>
                         <Icon id="project" size={1.6} />

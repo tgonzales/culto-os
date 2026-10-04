@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { BRAND } from "../../../types/Brand"
     import { onMount } from "svelte"
     import { activePopup, activeProject, projects, projectView, quickSearchActive, showRecentlyUsedProjects, shows, special, version } from "../../stores"
     import { history } from "../helpers/history"
@@ -47,7 +48,7 @@
 </script>
 
 <Center class="context #splash">
-    <h1>FreeShow</h1>
+    <h1>{BRAND.name}</h1>
     <p style="opacity: 0.7;">v{$version}</p>
     {#if $special.splashText}
         <p style="padding-top: 30px">
@@ -61,10 +62,10 @@
                 {/each}
             </span>
         </p>
-    {:else if Object.keys($shows).length < 20}
+    {:else if BRAND.docsUrl && Object.keys($shows).length < 20}
         <!-- shows up for new users (can be found in "About" menu) -->
         <p style="padding-top: 30px">
-            <Link url="https://freeshow.app/docs">
+            <Link url={BRAND.docsUrl}>
                 <T id="main.docs" />
                 <Icon id="launch" white />
             </Link>

@@ -1,19 +1,12 @@
-name: Build
+name: Build Windows installer
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os:
-          [
-            windows-latest,
-            macos-latest,
-            ubuntu-latest
-          ]
+  windows:
+    runs-on: windows-2022
 
     steps:
       - name: Check out Git repository
@@ -29,3 +22,14 @@ jobs:
 
       - name: Build app
         run: npm run build
+
+      # unsigned NSIS installer (no publish); code signing comes later
+      - name: Package installer
+        run: npx electron-builder --config config/building/electron-builder.yaml --win nsis --publish never
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: cultoOS-windows
+          path: dist/*.exe
+          if-no-files-found: error

@@ -94,9 +94,9 @@
     }
 
     const servers = [
-        { id: "remote", name: "RemoteShow", icon: "connection", enabledByDefault: true },
-        { id: "stage", name: "StageShow", icon: "stage", enabledByDefault: true },
-        { id: "controller", name: "ControlShow", icon: "connection", enabledByDefault: false },
+        { id: "remote", name: "Remote", icon: "connection", enabledByDefault: true },
+        { id: "stage", name: "Stage", icon: "stage", enabledByDefault: true },
+        { id: "controller", name: "Controller", icon: "connection", enabledByDefault: false },
         // ...(($special.optimizedMode && $disabledServers.output_stream !== false) ? [] : [{ id: "output_stream", name: "OutputShow", icon: "stage", enabledByDefault: false }]),
         { id: "output_stream", name: "OutputShow", icon: "stage", enabledByDefault: false },
         // Bitfocus Companion (WebSocket/REST)

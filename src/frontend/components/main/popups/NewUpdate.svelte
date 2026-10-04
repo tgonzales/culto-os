@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Main } from "../../../../types/IPC/Main"
+    import { BRAND } from "../../../../types/Brand"
     import { sendMain } from "../../../IPC/main"
     import { activePopup, popupData, special } from "../../../stores"
     import T from "../../helpers/T.svelte"
@@ -10,11 +11,9 @@
     registerPopupSubmit(download)
 
     let changelog = ($popupData.changelog || "").replaceAll("\r\n", "<br>").replaceAll("-", "•")
-    let latestVersion = $popupData.latestVersion
 
     function download() {
-        const isBeta = latestVersion.includes("-beta")
-        sendMain(Main.URL, isBeta ? "https://github.com/ChurchApps/FreeShow/releases" : "https://freeshow.app/?download")
+        sendMain(Main.URL, `https://github.com/${BRAND.releasesRepo}/releases`)
 
         activePopup.set(null)
         popupData.set({})

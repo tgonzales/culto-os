@@ -1,6 +1,6 @@
-appId: app.freeshow
-productName: FreeShow
-artifactName: FreeShow-${version}-${arch}.${ext}
+appId: app.cultoos
+productName: cultoOS
+artifactName: cultoOS-${version}-${arch}.${ext}
 
 # WIDEVINE
 # Use castlabs electron builds to get widevine support
@@ -38,11 +38,7 @@ win:
         - "**/node_modules/libspotifyctl/**/*"
         - "**/node_modules/openmediatransport/**"
         - "**/node_modules/sherpa-onnx-*/**"
-    azureSignOptions:
-        publisherName: Live Church Solutions
-        endpoint: https://wus2.codesigning.azure.net/
-        certificateProfileName: FreeShow
-        codeSigningAccountName: FreeShow
+    # TODO(cultoOS): add our own code signing certificate (unsigned builds trigger Windows SmartScreen)
 
 # linux
 

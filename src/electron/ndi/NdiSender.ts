@@ -1,3 +1,4 @@
+import { BRAND } from "../../types/Brand"
 import { join } from "path"
 import { Worker } from "worker_threads"
 import { toApp } from ".."
@@ -75,7 +76,7 @@ export class NdiSender {
 
 
     static initNameNDI(name?: string, outputName?: string) {
-        return name || `FreeShow NDI${outputName ? ` - ${outputName}` : ""}`
+        return name || `${BRAND.name} NDI${outputName ? ` - ${outputName}` : ""}`
     }
 
     static isBusyNDI(id: string): boolean {

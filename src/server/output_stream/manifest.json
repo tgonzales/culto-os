@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "FreeShow Output",
-    "short_name": "FreeShow Output",
+    "name": "cultoOS Output",
+    "short_name": "cultoOS Output",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#242832",
     "theme_color": "#242832",
-    "description": "View the output from FreeShow.",
+    "description": "View the output from cultoOS.",
     "icons": [
         {
             "src": "icon.png",

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte"
     import { Main } from "../../../../types/IPC/Main"
+    import { BRAND } from "../../../../types/Brand"
     import { sendMain } from "../../../IPC/main"
     import { alertUpdates, special, version } from "../../../stores"
     import { getUpdateData } from "../../../utils/checkForUpdates"
@@ -54,8 +55,7 @@
     function downloadLatest() {
         if (!hasUpdate || !latestVersion) return
 
-        const isBeta = latestVersion.includes("-beta")
-        sendMain(Main.URL, isBeta ? "https://github.com/ChurchApps/FreeShow/releases" : "https://freeshow.app/?download")
+        sendMain(Main.URL, `https://github.com/${BRAND.releasesRepo}/releases`)
     }
 
     onMount(checkUpdates)

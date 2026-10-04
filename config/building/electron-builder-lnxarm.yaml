@@ -1,6 +1,6 @@
-appId: app.freeshow
-productName: FreeShow
-artifactName: FreeShow-${version}-${arch}.${ext}
+appId: app.cultoos
+productName: cultoOS
+artifactName: cultoOS-${version}-${arch}.${ext}
 
 files:
     - build/electron/**

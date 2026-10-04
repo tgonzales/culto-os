@@ -22,15 +22,15 @@ const instanceID = crypto.randomBytes(3).toString("hex")
 const publishedServices: Partial<Record<string, Service>> = {}
 const dnsSdProcesses: Partial<Record<string, ChildProcess>> = {}
 
-// check for existing freeshow services before publishing
+// check for existing cultoos services before publishing
 function checkAndPublish(name: string, port: number, uniqueName: string, customData: any) {
     if (!bonjour) return
 
     let found = false
-    const browser = bonjour.find({ type: "freeshow", protocol: "udp" }, (service: any) => {
-        if (service.name.startsWith(`freeshow-${name}-`)) {
+    const browser = bonjour.find({ type: "cultoos", protocol: "udp" }, (service: any) => {
+        if (service.name.startsWith(`cultoos-${name}-`)) {
             found = true
-            console.warn(`Bonjour: A service named 'freeshow-${name}-*' is already published on the network.`)
+            console.warn(`Bonjour: A service named 'cultoos-${name}-*' is already published on the network.`)
             browser.stop()
         }
     })
@@ -41,7 +41,7 @@ function checkAndPublish(name: string, port: number, uniqueName: string, customD
         try {
             publishedServices[name] = bonjour.publish({
                 name: uniqueName,
-                type: "freeshow",
+                type: "cultoos",
                 protocol: "udp",
                 port,
                 txt: customData
@@ -63,7 +63,7 @@ export function publishPort(name: string, port: number) {
         return
     }
 
-    const uniqueName = `freeshow-${name}-${instanceID}`
+    const uniqueName = `cultoos-${name}-${instanceID}`
 
     if (isMac) {
         if (dnsSdProcesses[name]) return // already published
@@ -111,7 +111,7 @@ export function unpublishPorts() {
 // On macOS, publish via dns-sd to use the native Bonjour stack, avoiding hostname conflicts with mDNSResponder
 function publishViaDnsSd(name: string, port: number, uniqueName: string) {
     const ip = ips[0] ?? "localhost"
-    const args = ["-R", uniqueName, "_freeshow._udp", "local", String(port), `ip=${ip}`, `ips=${ips.join(",")}`]
+    const args = ["-R", uniqueName, "_cultoos._udp", "local", String(port), `ip=${ip}`, `ips=${ips.join(",")}`]
 
     try {
         const proc = spawn("dns-sd", args, { stdio: "ignore" })

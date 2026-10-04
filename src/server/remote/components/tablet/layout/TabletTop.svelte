@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { BRAND } from "../../../../../types/Brand"
     import { dictionary, activeTab } from "../../../util/stores"
     import { translate } from "../../../util/helpers"
     import Icon from "../../../../common/components/Icon.svelte"
@@ -10,7 +11,7 @@
 
 <div class="top">
     <span class="logo-area">
-        <h1 style="align-self: center;width: 100%;padding: 0px 10px;text-align: center;font-size: 1.8em;">FreeShow</h1>
+        <h1 style="align-self: center;width: 100%;padding: 0px 10px;text-align: center;font-size: 1.8em;">{BRAND.name}</h1>
     </span>
     <span class="middle-buttons">
         <!-- Show Mode -->

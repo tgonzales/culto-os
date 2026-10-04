@@ -5,7 +5,6 @@
     import Navigation from "./components/edit/Navigation.svelte"
     import LazyLoad from "./components/helpers/LazyLoad.svelte"
     import ProfileChangerMenu from "./components/main/ProfileChangerMenu.svelte"
-    import Tipbar from "./components/main/Tipbar.svelte"
     import Top from "./components/main/Top.svelte"
     import Preview from "./components/output/preview/Preview.svelte"
     import SettingsTabs from "./components/settings/SettingsTabs.svelte"
@@ -126,8 +125,6 @@
     {#if $ai.enabled}
         <AiFloating />
     {/if}
-
-    <Tipbar />
 </div>
 
 <style>
