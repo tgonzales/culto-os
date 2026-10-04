@@ -2,6 +2,13 @@ appId: app.cultoos
 productName: cultoOS
 artifactName: cultoOS-${version}-${arch}.${ext}
 
+# GitHub Releases of tgonzales/culto-os (used by .github/workflows/release.yml and by the in-app update check)
+publish:
+    provider: github
+    owner: tgonzales
+    repo: culto-os
+    releaseType: release
+
 # WIDEVINE
 # Use castlabs electron builds to get widevine support
 # electronDownload:
