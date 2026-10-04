@@ -173,9 +173,7 @@
     $: currentBookName = books?.find((b: any) => b.number?.toString() === activeReference.book?.toString())?.name || ""
     $: currentChapter = activeReference.chapters[activeReference.chapters.length - 1]
     $: lastSelection = (activeReference.verses[activeReference.verses.length - 1] || []).map((a) => a.toString())
-    $: highlightVerses = splittedVerses
-        .filter((content) => lastSelection.includes(content.id.toString()))
-        .map((content) => ({ id: content.id, words: plainVerseWords(formatBibleText(content.text)), key: highlightKey(currentBookName, currentChapter, content.id) }))
+    $: highlightVerses = splittedVerses.filter((content) => lastSelection.includes(content.id.toString())).map((content) => ({ id: content.id, words: plainVerseWords(formatBibleText(content.text)), key: highlightKey(currentBookName, currentChapter, content.id) }))
     $: hasHighlights = Object.values($scriptureHighlights).some((h) => !isEmptyHighlight(h))
 
     function updateHighlight(key: string, words: string[], selected: number[], all: boolean) {
