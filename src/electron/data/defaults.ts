@@ -21,7 +21,7 @@ export const defaultSettings: { [key in SaveListSettings]: any } = {
             enabled: true,
             active: true,
             name: "Primary",
-            color: "#F0008C",
+            color: "#8b5cf6",
             bounds: { x: 0, y: 0, width: 1920, height: 1080 },
             screen: null,
             style: "default",
