@@ -9,15 +9,15 @@ export const defaultThemes: { [key: string]: Themes } = {
             size: "1em"
         },
         colors: {
-            primary: "#242832",
-            "primary-lighter": "#2f3542",
-            "primary-darker": "#191923",
-            "primary-darkest": "#12121c",
-            text: "#f0f0ff",
+            primary: "#2b2724",
+            "primary-lighter": "#37322e",
+            "primary-darker": "#211e1b",
+            "primary-darkest": "#191714",
+            text: "#f4eee7",
             textInvert: "#131313",
-            "secondary-text": "#f0f0ff",
-            secondary: "#8b5cf6",
-            "secondary-opacity": "rgba(139, 92, 246, 0.5)",
+            "secondary-text": "#2b2119",
+            secondary: "#c9a27e",
+            "secondary-opacity": "rgba(201, 162, 126, 0.5)",
             hover: "rgb(255 255 255 / 0.05)",
             focus: "rgb(255 255 255 / 0.1)"
         }
@@ -58,8 +58,8 @@ export const defaultThemes: { [key: string]: Themes } = {
             text: "#333748",
             textInvert: "#f0f0ff",
             "secondary-text": "#131313",
-            secondary: "#8b5cf6",
-            "secondary-opacity": "rgb(139 92 246 / 0.5)",
+            secondary: "#a67c5b",
+            "secondary-opacity": "rgb(166 124 91 / 0.5)",
             hover: "rgb(0 0 0 / 0.05)",
             focus: "rgb(0 0 0 / 0.1)"
         }

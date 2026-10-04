@@ -588,7 +588,7 @@ export const _updaters = {
 
                 // create output if no normal outputs (in case stage outputs are still active)
                 outputs.update((a) => {
-                    a.default = { enabled: true, active: true, name: translateText("theme.primary"), color: "#8b5cf6", bounds: { x: 0, y: 0, width: 1920, height: 1080 }, screen: null, style: "default", show: {} }
+                    a.default = { enabled: true, active: true, name: translateText("theme.primary"), color: "#c9a27e", bounds: { x: 0, y: 0, width: 1920, height: 1080 }, screen: null, style: "default", show: {} }
                     return a
                 })
             }, 100)

@@ -1071,7 +1071,7 @@ export const defaultOutput: Output = {
     enabled: true,
     active: true,
     name: "Output",
-    color: "#8b5cf6",
+    color: "#c9a27e",
     bounds: { x: 0, y: 0, width: 1920, height: 1080 }, // x: 1920 ?
     screen: null
 }

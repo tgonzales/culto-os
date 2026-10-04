@@ -43,14 +43,14 @@
     }
 
     const defaultGroups = {
-        break: { name: "break", default: true, color: "#f5255e" },
-        bridge: { name: "bridge", default: true, color: "#f52598", shortcut: "B" },
-        chorus: { name: "chorus", default: true, color: "#f525d2", shortcut: "C" },
-        intro: { name: "intro", default: true, color: "#d525f5" },
-        outro: { name: "outro", default: true, color: "#a525f5" },
-        pre_chorus: { name: "pre_chorus", default: true, color: "#8825f5" },
-        tag: { name: "tag", default: true, color: "#7525f5" },
-        verse: { name: "verse", default: true, color: "#5825f5", shortcut: "V" }
+        break: { name: "break", default: true, color: "#e6a1a1" },
+        bridge: { name: "bridge", default: true, color: "#e8b796", shortcut: "B" },
+        chorus: { name: "chorus", default: true, color: "#e5cf8f", shortcut: "C" },
+        intro: { name: "intro", default: true, color: "#b8d4a8" },
+        outro: { name: "outro", default: true, color: "#9fcfc4" },
+        pre_chorus: { name: "pre_chorus", default: true, color: "#a7c3e3" },
+        tag: { name: "tag", default: true, color: "#c2b0e0" },
+        verse: { name: "verse", default: true, color: "#d9a8c9", shortcut: "V" }
     }
 
     function addGroup() {

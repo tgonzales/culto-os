@@ -97,7 +97,7 @@
     class:red
     {disabled}
     style="
-    background: {variant === 'contained' ? (gradient ? 'linear-gradient(160deg, #4f46e5 0%, #6d28d9 50%, #9333ea 100%)' : 'var(--secondary)') : variant === 'outlined' ? 'var(--primary-darkest)' : 'transparent'};
+    background: {variant === 'contained' ? (gradient ? 'linear-gradient(160deg, #8c6a4f 0%, #b08968 50%, #d6bc9c 100%)' : 'var(--secondary)') : variant === 'outlined' ? 'var(--primary-darkest)' : 'transparent'};
     color: {variant === 'contained' ? 'var(--secondary-text)' : white ? 'var(--text)' : 'var(--text)'};
     border-color: {white ? 'rgb(255 255 255 / 0.08)' : variant === 'outlined' ? 'var(--primary-lighter)' : 'transparent'};
     {$$props.style || ''}

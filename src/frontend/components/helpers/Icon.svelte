@@ -23,11 +23,11 @@
 
     const gradientId = `icon-gradient-${uid(5)}`
     export let gradientColor: string | null = null
-    let baseColor = gradientColor || (gradient ? "#9333ea" : "#8b5cf6")
+    let baseColor = gradientColor || (gradient ? "#b08968" : "#c9a27e")
     $: if ($themes[$theme]) updateBaseColor()
     function updateBaseColor() {
         if (gradientColor || gradient) return
-        baseColor = $themes[$theme]?.colors?.secondary || "#8b5cf6"
+        baseColor = $themes[$theme]?.colors?.secondary || "#c9a27e"
     }
 
     // smaller change
