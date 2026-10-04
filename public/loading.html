@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FreeShow - Loading</title>
+        <title>cultoOS - Carregando</title>
 
         <link rel="stylesheet" href="global.css" />
 
@@ -15,16 +15,15 @@
             }
 
             main {
-                /* background-color: var(--primary); */
-                background-color: #28276d;
-                background: linear-gradient(140deg, #28276d 20%, #150f30);
+                background-color: #2b2724;
+                background: linear-gradient(140deg, #37322e 10%, #191714);
                 width: 100%;
                 height: 100%;
                 border-radius: var(--radius);
 
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 14px;
                 justify-content: center;
                 align-items: center;
                 -webkit-app-region: drag;
@@ -33,36 +32,25 @@
             }
 
             img {
-                height: calc(100% - var(--loader-height));
-                width: 42%;
-                object-fit: cover;
-                object-position: top left;
-
-                left: 0;
-                /* max-width: 40%; */
-                position: absolute;
-                top: var(--loader-height);
-
-                border-bottom-left-radius: var(--radius);
-                border-top-right-radius: var(--radius);
+                width: 96px;
+                height: 96px;
+                border-radius: 22px;
+                box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
             }
 
             .text {
-                position: absolute;
-                right: 0;
-                width: 58%;
-
                 text-align: center;
             }
 
             .v {
-                opacity: 0.3;
+                opacity: 0.4;
                 font-size: 0.9em;
+                margin-top: 4px;
             }
 
             h1 {
-                font-size: 3em;
-                background: -webkit-linear-gradient(340deg, var(--secondary), #ef4684);
+                font-size: 2.6em;
+                background: -webkit-linear-gradient(340deg, #d6bc9c, #b08968);
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -128,10 +116,10 @@
         </div>
 
         <main>
-            <img src="./assets/startup.webp" alt="Loading..." draggable="false" />
+            <img src="./brand-logo.png" alt="cultoOS" draggable="false" />
 
             <div class="text">
-                <h1>FreeShow</h1>
+                <h1>cultoOS</h1>
                 <p class="v">v<span class="version">0.0.0</span></p>
             </div>
         </main>
