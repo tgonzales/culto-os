@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { chunk, diffLocal, emptyLedger, hashData, needsApply, rememberApplied, showFileName } from "./cultoosCore"
+import { chunk, diffLocal, emptyLedger, hashData, mediaContentType, mediaRecordId, needsApply, referencedMediaPaths, rememberApplied, showFileName } from "./cultoosCore"
 
 describe("cultoOS sync core", () => {
     it("pushes new and edited records, skipping unchanged ones", () => {
@@ -58,5 +58,23 @@ describe("cultoOS sync core", () => {
     it("hashes deterministically and chunks batches", () => {
         expect(hashData({ a: 1 })).toBe(hashData({ a: 1 }))
         expect(chunk([1, 2, 3, 4, 5], 2)).toEqual([[1, 2], [3, 4], [5]])
+    })
+
+    it("hashes independently of key order", () => {
+        expect(hashData({ a: 1, b: { c: 2, d: [1, { e: 3, f: 4 }] } })).toBe(hashData({ b: { d: [1, { f: 4, e: 3 }], c: 2 }, a: 1 }))
+    })
+
+    it("never turns media mappings into deletions", () => {
+        const ledger = emptyLedger()
+        rememberApplied(ledger, { collection: "media", id: "m1", data: { path: "C:/x.jpg" }, deleted: false })
+        expect(diffLocal([], ledger)).toEqual([])
+    })
+
+    it("finds local media used by shows and templates", () => {
+        const shows = [{ media: { a: { path: "C:/Fundos/ceu.jpg" }, b: { path: "https://youtube.com/x" }, c: { path: "C:/doc.txt" } } }]
+        const templates = [{ settings: { backgroundPath: "/Users/maria/Videos/loop.mp4" } }]
+        expect(referencedMediaPaths(shows, templates)).toEqual(["C:/Fundos/ceu.jpg", "/Users/maria/Videos/loop.mp4"])
+        expect(mediaContentType("loop.MP4")).toBe("video/mp4")
+        expect(mediaRecordId("C:/a.jpg")).toHaveLength(24)
     })
 })

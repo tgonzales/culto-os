@@ -1158,7 +1158,7 @@ export async function addToMediaFolder(mediaPaths: string[], outputFolder?: stri
     return changed
 }
 
-function getFileParentFolderId(filePath: string) {
+export function getFileParentFolderId(filePath: string) {
     const fileFolderPath = upath.dirname(filePath)
     const parentFolderName = upath.basename(fileFolderPath)
     const uniqueName = parentFolderName + "_" + filePathHashCode(fileFolderPath)

@@ -396,7 +396,7 @@ export interface MainReturnPayloads {
     [Main.CULTOOS_PAIR]: Promise<{ success: boolean; churchName?: string; error?: string }>
     [Main.CULTOOS_STATUS]: { connected: boolean; churchName: string; deviceName: string; lastSync: number; url: string }
     [Main.CULTOOS_DISCONNECT]: { success: boolean }
-    [Main.CULTOOS_SYNC]: Promise<{ success: boolean; error?: string; pulled?: number; pushed?: number; downloadedShowIds?: string[] }>
+    [Main.CULTOOS_SYNC]: Promise<{ success: boolean; error?: string; pulled?: number; pushed?: number; downloadedShowIds?: string[]; downloadedMedia?: number }>
     [Main.GET_CONVERSATION_ID]: Promise<string | null>
     [Main.SEND_SOCKET_MESSAGE]: Promise<boolean>
     // Provider-based routing

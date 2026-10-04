@@ -1,14 +1,17 @@
 // ----- cultoOS -----
 // Sync with the cultoOS cloud: pair this computer with a code from the web panel, then pull/push records.
 
+import crypto from "crypto"
 import { safeStorage } from "electron"
+import fs from "fs"
 import path from "path"
+import { Readable } from "stream"
 import { BRAND } from "../../types/Brand"
 import { Main } from "../../types/IPC/Main"
 import { _store, getStore, safeStoreSet } from "../data/store"
 import { sendMain } from "../IPC/main"
-import { deleteFile, doesPathExist, getDataFolderPath, loadShows, parseShow, readFile, writeFileAsync } from "../utils/files"
-import { chunk, diffLocal, emptyLedger, needsApply, rememberApplied, showFileName, type LocalRecord, type RemoteChange, type SyncLedger } from "./cultoosCore"
+import { deleteFile, doesPathExist, getDataFolderPath, getFileParentFolderId, getMediaSyncFolderPath, loadShows, parseShow, readFile, writeFileAsync } from "../utils/files"
+import { chunk, diffLocal, emptyLedger, mediaContentType, mediaRecordId, needsApply, referencedMediaPaths, rememberApplied, showFileName, type LocalRecord, type MediaRecord, type PushChange, type RemoteChange, type SyncLedger } from "./cultoosCore"
 
 const SECRET_KEY = "cultoosCloud"
 const PUSH_BATCH = 200
@@ -90,7 +93,7 @@ export function cultoosDisconnect() {
 
 // ----- local data -----
 
-function collectLocal(): LocalRecord[] {
+async function collectLocal(ledger: SyncLedger): Promise<LocalRecord[]> {
     const records: LocalRecord[] = []
 
     const showsFolder = getDataFolderPath("shows")
@@ -118,7 +121,104 @@ function collectLocal(): LocalRecord[] {
         Object.entries(store || {}).forEach(([id, data]: [string, any]) => records.push({ collection, id, data, modified: data?.modified }))
     })
 
+    // media files that exist on this computer and are used by synced shows/templates
+    const shows = records.filter((r) => r.collection === "shows").map((r) => r.data)
+    const templates = Object.values(getStore("TEMPLATES") || {})
+    for (const filePath of referencedMediaPaths(shows, templates)) {
+        const media = await describeMedia(filePath, ledger)
+        if (media) records.push({ collection: "media", id: mediaRecordId(filePath), data: media })
+    }
+
     return records
+}
+
+// ----- media files -----
+
+async function sha256File(filePath: string) {
+    return new Promise<string>((resolve, reject) => {
+        const hash = crypto.createHash("sha256")
+        fs.createReadStream(filePath)
+            .on("data", (chunk) => hash.update(chunk))
+            .on("end", () => resolve(hash.digest("hex")))
+            .on("error", reject)
+    })
+}
+
+async function describeMedia(filePath: string, ledger: SyncLedger): Promise<MediaRecord | null> {
+    const contentType = mediaContentType(filePath)
+    if (!contentType) return null
+
+    let stat: fs.Stats
+    try {
+        stat = fs.statSync(filePath)
+    } catch {
+        return null
+    }
+    if (!stat.isFile()) return null
+
+    // hashing big videos is slow: cache by path, size and modification time
+    const cacheKey = `${filePath}|${stat.size}|${stat.mtimeMs}`
+    ledger.fileHashes = ledger.fileHashes || {}
+    const hash = ledger.fileHashes[cacheKey] || (ledger.fileHashes[cacheKey] = await sha256File(filePath))
+    return { path: filePath, name: path.basename(filePath), hash, size: stat.size, contentType }
+}
+
+// Uploads the files of new media records straight to the private cloud storage (presigned URLs).
+async function uploadMedia(changes: PushChange[], token: string) {
+    const files = changes.filter((c) => c.collection === "media" && !c.deleted).map((c) => c.data as MediaRecord)
+    if (!files.length) return
+
+    const payload = files.map(({ hash, size, contentType }) => ({ hash, size, contentType }))
+    const { uploads } = await api<{ uploads: { hash: string; url: string }[] }>("/api/media/upload-urls", token, { method: "POST", body: JSON.stringify({ files: payload }) })
+    for (const upload of uploads) {
+        const file = files.find((f) => f.hash === upload.hash)
+        if (!file || !doesPathExist(file.path)) continue
+        const body = Readable.toWeb(fs.createReadStream(file.path)) as any
+        const response = await fetch(upload.url, { method: "PUT", body, headers: { "content-type": file.contentType, "content-length": String(file.size) }, duplex: "half" } as RequestInit)
+        if (!response.ok) throw new Error(`media upload failed: ${response.status}`)
+    }
+    if (uploads.length) await api("/api/media/complete", token, { method: "POST", body: JSON.stringify({ files: payload }) })
+}
+
+// Where the app looks for a missing file (see locateMediaFile): <media sync folder>/<parent folder id>/<file name>
+function syncFolderPathFor(originalPath: string) {
+    return path.join(getMediaSyncFolderPath(), getFileParentFolderId(originalPath), path.basename(originalPath))
+}
+
+// Downloads files used by synced shows/templates that don't exist on this computer.
+async function downloadMissingMedia(ledger: SyncLedger, token: string, local: LocalRecord[]) {
+    const byPath = new Map(Object.values(ledger.media || {}).map((m) => [m.path, m]))
+    if (!byPath.size) return 0
+
+    const shows = local.filter((r) => r.collection === "shows").map((r) => r.data)
+    const missing = referencedMediaPaths(shows, Object.values(getStore("TEMPLATES") || {}))
+        .filter((p) => byPath.has(p) && !doesPathExist(p) && !doesPathExist(syncFolderPathFor(p)))
+        .map((p) => byPath.get(p)!)
+    if (!missing.length) return 0
+
+    let downloaded = 0
+    for (const batch of chunk(missing, 50)) {
+        const { urls } = await api<{ urls: { [hash: string]: string } }>("/api/media/download-urls", token, { method: "POST", body: JSON.stringify({ hashes: batch.map((m) => m.hash) }) })
+        for (const media of batch) {
+            const url = urls[media.hash]
+            if (!url) continue
+            const response = await fetch(url)
+            if (!response.ok || !response.body) continue
+
+            const target = syncFolderPathFor(media.path)
+            fs.mkdirSync(path.dirname(target), { recursive: true })
+            const temp = `${target}.download`
+            await new Promise<void>((resolve, reject) => {
+                Readable.fromWeb(response.body as any)
+                    .pipe(fs.createWriteStream(temp))
+                    .on("finish", () => resolve())
+                    .on("error", reject)
+            })
+            fs.renameSync(temp, target)
+            downloaded++
+        }
+    }
+    return downloaded
 }
 
 async function applyRemote(changes: RemoteChange[], ledger: SyncLedger) {
@@ -157,6 +257,10 @@ async function applyRemote(changes: RemoteChange[], ledger: SyncLedger) {
             if (change.deleted) delete target[change.id]
             else target[change.id] = change.data
             projectsChanged = true
+        } else if (change.collection === "media") {
+            ledger.media = ledger.media || {}
+            if (change.deleted) delete ledger.media[change.id]
+            else ledger.media[change.id] = change.data
         } else if (change.collection === "categories") {
             syncedSettings ??= JSON.parse(JSON.stringify(getStore("SYNCED_SETTINGS")))
             syncedSettings.categories = syncedSettings.categories || {}
@@ -219,10 +323,12 @@ export async function cultoosSync() {
         const downloadedShowIds = await applyRemote(pulled, ledger)
         ledger.cursor = cursor
 
-        // 2. push local changes
-        const changes = diffLocal(collectLocal(), ledger)
+        // 2. push local changes (media files are uploaded before the records that point to them)
+        const local = await collectLocal(ledger)
+        const changes = diffLocal(local, ledger)
         let pushed = 0
         for (const batch of chunk(changes, PUSH_BATCH)) {
+            await uploadMedia(batch, connection.token)
             const result = await api<{ results: { collection: string; id: string; status: string }[] }>("/api/sync/push", connection.token, { method: "POST", body: JSON.stringify({ changes: batch }) })
             result.results.forEach((r, i) => {
                 // "stale": the cloud has a newer version, which arrives on the next pull
@@ -233,9 +339,12 @@ export async function cultoosSync() {
             })
         }
 
+        // 3. bring files used here that were added on other computers
+        const downloadedMedia = await downloadMissingMedia(ledger, connection.token, local)
+
         ledger.lastSync = Date.now()
         await safeStoreSet(_store.CULTOOS_SYNC, ledger, "CULTOOS_SYNC")
-        return { success: true, pulled: pulled.length, pushed, downloadedShowIds }
+        return { success: true, pulled: pulled.length, pushed, downloadedShowIds, downloadedMedia }
     } catch (err: any) {
         if (err?.status === 401) return { success: false, error: "unauthorized" }
         console.error("cultoOS sync failed:", err)
